@@ -64,7 +64,7 @@ function Navbar() {
   return (
     <header className={`navbar ${scrolled ? "is-scrolled" : ""}`}>
       <a className="brand" href="#home" aria-label="Azeem, back to top">
-        AZ<span> / </span>
+        <img src={`${import.meta.env.BASE_URL}images/az-logo.svg`} alt="" width="54" height="54" />
       </a>
       <a className="nav-caption" href="#home">
         {profile.brand}
