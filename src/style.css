@@ -1217,3 +1217,38 @@ h2{font-weight:600;letter-spacing:-.058em}
  .portrait-stage::before{filter:none}
  .button,.skill-card,.featured-card{transition:none!important}
 }
+
+/* Cinematic depth pass: vivid motion without sacrificing contrast or legibility. */
+.navbar{transition:background .28s ease,box-shadow .28s ease,border-color .28s ease}
+.navbar.is-scrolled{background:#070a1af7;border-bottom-color:#bc80ff80;box-shadow:0 12px 35px #050414a6}
+.navbar nav a{transition:color .25s ease}
+.navbar nav a[aria-current]{color:#f1e5ff;text-shadow:0 0 18px #a85dff88}
+.hero-copy,.chapter,.section-heading,.about-copy,.contact-bottom,.contact-links{position:relative;z-index:3}
+.hero h1,.section-heading h2,.about-layout h2,.contact h2{color:#faf8ff;text-shadow:0 2px 22px #121b3940}
+.eyebrow,.chapter,.portrait-coordinate{color:#d0c7e8}
+.muted,.work-note,.skill-card ul,.contact-links a{color:#c3c3d9}
+.hero-description .muted{color:#c8c9de}
+.portrait-stage{isolation:isolate}
+.portrait-backlight,.portrait-halo{position:absolute;pointer-events:none;will-change:transform}
+.portrait-backlight{inset:3% -7% 0;z-index:-2;background:radial-gradient(ellipse at 48% 56%,#7134ec8c 0%,#5128b75c 31%,transparent 67%);filter:blur(25px)}
+.portrait-halo{inset:8% 0 3%;z-index:-1;border-radius:50%;background:radial-gradient(ellipse at 50% 55%,transparent 40%,#a66aff25 56%,transparent 73%);border:1px solid #bd7dff38;box-shadow:0 0 80px #8d47ff26,inset 0 0 50px #a46cff16}
+.portrait-scroll{z-index:2}
+.portrait{filter:drop-shadow(0 0 17px #915aff88) drop-shadow(0 0 16px #2776f766)}
+.orbit{z-index:-1}
+.orbit-two{z-index:0}
+.section-pad{background-blend-mode:screen,normal}
+.skill-card,.featured-card{background-color:#0c1025}
+.skill-card:hover,.featured-card:hover{box-shadow:0 15px 42px #7733d844}
+@media(max-width:700px){
+ .portrait-backlight{filter:blur(12px);inset:7% 0 0}
+ .portrait-halo{box-shadow:0 0 36px #8d47ff20}
+ .portrait{filter:drop-shadow(0 0 12px #9055ff66)}
+ .navbar nav.open{background:#0b0b25f7}
+ .navbar nav.open a{font-size:14px;min-height:44px;display:flex;align-items:center;justify-content:space-between;color:#f1e8ff}
+ .navbar nav.open a[aria-current]{color:#d2a7ff}
+ .hero-copy>.eyebrow{color:#d1c7e4}
+}
+@media(prefers-reduced-motion:reduce){
+ .portrait-backlight,.portrait-halo{will-change:auto;transform:none!important;filter:none}
+ .navbar{transition:none}
+}
