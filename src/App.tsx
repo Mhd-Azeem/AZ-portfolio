@@ -29,7 +29,11 @@ function Navbar() {
   const [active, setActive] = useState("home");
   const toggle = useRef<HTMLButtonElement>(null);
   const nav = useRef<HTMLElement>(null);
+  const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
+    const trackScroll = () => setScrolled(window.scrollY > 24);
+    trackScroll();
+    window.addEventListener("scroll", trackScroll, { passive: true });
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -52,12 +56,13 @@ function Navbar() {
     document.addEventListener("keydown", escape);
     return () => {
       observer.disconnect();
+      window.removeEventListener("scroll", trackScroll);
       document.removeEventListener("pointerdown", closeOutside);
       document.removeEventListener("keydown", escape);
     };
   }, [open]);
   return (
-    <header className="navbar">
+    <header className={`navbar ${scrolled ? "is-scrolled" : ""}`}>
       <a className="brand" href="#home" aria-label="Azeem, back to top">
         AZ<span> / </span>
       </a>
@@ -145,6 +150,8 @@ function HeroSection() {
         </div>
       </div>
       <div className="portrait-stage">
+        <div className="portrait-backlight" aria-hidden="true" />
+        <div className="portrait-halo" aria-hidden="true" />
         <div className="orbit orbit-one depth" aria-hidden="true" />
         <div className="orbit orbit-two" aria-hidden="true" />
         <span className="portrait-coordinate">FIG. 01 / THE CREATOR</span>
