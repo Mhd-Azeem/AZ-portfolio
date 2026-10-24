@@ -6,6 +6,10 @@ import {
   Menu,
   X,
   Mail,
+  MessageCircle,
+  Github,
+  Rocket,
+  Users,
   Code2,
   Layers,
   Sparkles,
@@ -302,49 +306,53 @@ function WorkSection() {
   );
 }
 function ContactSection() {
+  const whatsapp = `https://wa.me/${profile.whatsapp.replace(/\\D/g, "")}`;
   return (
     <section id="contact" className="contact scene section-pad">
       <Chapter number="04" label="THE NEXT CHAPTER" />
-      <div className="scene-symbol scene-symbol-contact" aria-hidden="true">
-        <Sparkles size={46} strokeWidth={1.4} />
-      </div>
-      <p className="eyebrow">HAVE SOMETHING IN MIND?</p>
-      <h2>
-        LET’S
-        <br />
-        <span className="accent">CONNECT.</span>
-        <span className="contact-arrow" aria-hidden="true">
-          ↗
-        </span>
-      </h2>
-      <div className="contact-bottom">
-        <p className="muted">
-          An idea, a collaboration, or just a hello.
-          <br />
-          Every great experience starts with a conversation.
-        </p>
-        <a className="button primary" href={`mailto:${profile.email}`}>
-          Start a Conversation <ArrowUpRight size={18} />
-        </a>
-      </div>
-      <div className="contact-links">
-        <a href={`mailto:${profile.email}`}>
-          {profile.email} <Mail size={16} />
-        </a>
-        <a href={profile.github} target="_blank" rel="noreferrer">
-          GitHub <ArrowUpRight size={16} />
-        </a>
-        <a
-          href={`https://wa.me/${profile.whatsapp.replace(/\D/g, "")}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          WhatsApp <ArrowUpRight size={16} />
-        </a>
+      <div className="contact-showcase">
+        <div className="contact-intro">
+          <p className="eyebrow">04 / CONTACT · OPEN TO IDEAS</p>
+          <h2>LET’S BUILD<br /><span className="accent">SOMETHING.</span></h2>
+          <p className="contact-description">Have an idea, a project, or just want to connect?<br />I’d love to hear from you.</p>
+          <div className="contact-interests" aria-label="Reasons to get in touch">
+            <span><Rocket size={18} aria-hidden="true" /> New projects</span>
+            <span><Users size={18} aria-hidden="true" /> Collaboration</span>
+            <span><MessageCircle size={18} aria-hidden="true" /> Say hello</span>
+          </div>
+        </div>
+        <div className="contact-card">
+          <div className="contact-card-header">
+            <span>START A CONVERSATION</span>
+            <span className="contact-availability"><span aria-hidden="true" /> {profile.availability}</span>
+          </div>
+          <div className="contact-methods">
+            <a href={`mailto:${profile.email}`} className="contact-method">
+              <span className="contact-method-icon"><Mail size={25} aria-hidden="true" /></span>
+              <span className="contact-method-copy"><strong>Email me</strong><small>{profile.email}</small></span>
+              <ArrowUpRight size={22} aria-hidden="true" />
+            </a>
+            <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="contact-method">
+              <span className="contact-method-icon"><MessageCircle size={25} aria-hidden="true" /></span>
+              <span className="contact-method-copy"><strong>WhatsApp</strong><small>Start a chat</small></span>
+              <ArrowUpRight size={22} aria-hidden="true" />
+            </a>
+            <a href={profile.github} target="_blank" rel="noopener noreferrer" className="contact-method">
+              <span className="contact-method-icon"><Github size={25} aria-hidden="true" /></span>
+              <span className="contact-method-copy"><strong>GitHub</strong><small>Explore my development work</small></span>
+              <ArrowUpRight size={22} aria-hidden="true" />
+            </a>
+          </div>
+          <a className="contact-card-cta" href={`mailto:${profile.email}`}>
+            <Mail size={20} aria-hidden="true" /> Send a message <ArrowUpRight size={19} aria-hidden="true" />
+          </a>
+          <p className="contact-card-footer">Let’s turn ideas into something useful.</p>
+        </div>
       </div>
     </section>
   );
 }
+
 function Footer() {
   return (
     <footer>
