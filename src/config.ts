@@ -1,6 +1,6 @@
 export const profile = {
   name: "Mohammed Azeem",
-  brand: "AZEEM.DEV",
+  brand: "AZEEM_DEVELOPER",
   subtitle: "Independent developer building for Android, Windows and the web.",
   about:
     "I’m Mohammed Azeem, an independent developer who turns curious ideas into software people can use. I build across Android, Windows and the web, with an eye for clear interfaces and the details that make technology feel human.",
@@ -39,4 +39,5 @@ export const skillGroups = [
 ];
 // A small visual signature only. AZ Appverse is the complete project catalog.
 export const featuredNames = ["AzMusic", "Jarvis", "AZ Remote Connect"];
+
 
