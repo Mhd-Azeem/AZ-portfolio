@@ -97,8 +97,8 @@ function Navbar() {
           </a>
         ))}
       </nav>
-      <a className="nav-contact" href={`mailto:${profile.email}`}>
-        Let’s talk <ArrowUpRight size={15} />
+      <a className="nav-contact" href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="Open Mohammed Azeem GitHub profile">
+        GitHub <ArrowUpRight size={15} />
       </a>
     </header>
   );
