@@ -1318,3 +1318,8 @@ h2{font-weight:600;letter-spacing:-.058em}
   .hero{padding-top:95px;padding-bottom:50px}
   .hero .portrait-stage{height:min(57vh,480px)}
 }
+
+/* Circular AZ emblem in the floating glass navigation tile. */
+.navbar .brand{display:flex;align-items:center;justify-content:center;padding:5px;min-width:62px;min-height:62px;line-height:1}
+.navbar .brand img{display:block;width:54px;height:54px;object-fit:contain;border-radius:12px;filter:drop-shadow(0 0 10px #8b55ff50)}
+@media(max-width:700px){.navbar .brand{min-width:52px;min-height:52px;padding:4px}.navbar .brand img{width:44px;height:44px}}
