@@ -78,6 +78,9 @@ export function useSceneMotion() {
     const back = element.querySelector<HTMLElement>(".portrait-backlight");
     let x = 0, y = 0, tx = 0, ty = 0;
     let active = false;
+    let ticking = false;
+    const stopTick = () => { if (ticking) { gsap.ticker.remove(tick); ticking = false; } };
+    const startTick = () => { if (!ticking && finePointer.matches && !document.hidden) { gsap.ticker.add(tick); ticking = true; } };
     const setX = portrait ? gsap.quickSetter(portrait, "x", "px") : null;
     const setY = portrait ? gsap.quickSetter(portrait, "y", "px") : null;
     const setOrbitX = orbit ? gsap.quickSetter(orbit, "x", "px") : null;
@@ -91,12 +94,11 @@ export function useSceneMotion() {
       const bounds = hero.getBoundingClientRect();
       tx = gsap.utils.clamp(-1, 1, (event.clientX - bounds.left - bounds.width / 2) / (bounds.width / 2)) * 16;
       ty = gsap.utils.clamp(-1, 1, (event.clientY - bounds.top - bounds.height / 2) / (bounds.height / 2)) * 11;
-      element.style.setProperty("--pointer-x", `${event.clientX}px`);
-      element.style.setProperty("--pointer-y", `${event.clientY}px`);
+      startTick();
     };
-    const reset = () => { tx = 0; ty = 0; };
+    const reset = () => { tx = 0; ty = 0; startTick(); };
     const tick = () => {
-      if (!finePointer.matches || document.hidden) return;
+      if (!finePointer.matches || document.hidden) { stopTick(); return; }
       x += (tx - x) * 0.085;
       y += (ty - y) * 0.085;
       if (Math.abs(x) < 0.01 && Math.abs(tx) < 0.01) x = 0;
@@ -105,20 +107,20 @@ export function useSceneMotion() {
       setOrbitX?.(-x * 1.2); setOrbitY?.(-y * 1.2);
       setHaloX?.(x * 1.45); setHaloY?.(y * 1.45);
       setBackX?.(-x * 1.8); setBackY?.(-y * 1.8);
+      if (Math.abs(x - tx) < 0.02 && Math.abs(y - ty) < 0.02) stopTick();
     };
     const enablePointer = () => {
       if (active || !finePointer.matches || !hero || !portrait) return;
       hero.addEventListener("pointermove", move, { passive: true });
       hero.addEventListener("pointerleave", reset);
-      gsap.ticker.add(tick);
       active = true;
     };
     const disablePointer = () => {
       if (active && hero) {
         hero.removeEventListener("pointermove", move);
         hero.removeEventListener("pointerleave", reset);
-        gsap.ticker.remove(tick);
       }
+      stopTick();
       active = false; reset(); x = 0; y = 0;
       if (portrait) gsap.set(portrait, { clearProps: "x,y" });
       if (orbit) gsap.set(orbit, { clearProps: "x,y" });
@@ -128,6 +130,8 @@ export function useSceneMotion() {
     const mediaChange = () => { disablePointer(); enablePointer(); };
     enablePointer();
     finePointer.addEventListener("change", mediaChange);
+    const visibilityChange = () => { if (document.hidden) stopTick(); }; 
+    document.addEventListener("visibilitychange", visibilityChange);
 
     let alive = true;
     const refresh = () => ScrollTrigger.refresh();
@@ -138,6 +142,7 @@ export function useSceneMotion() {
     return () => {
       alive = false;
       finePointer.removeEventListener("change", mediaChange);
+      document.removeEventListener("visibilitychange", visibilityChange);
       disablePointer();
       portraitImage?.removeEventListener("load", refresh);
       window.removeEventListener("load", refresh);
