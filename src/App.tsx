@@ -154,7 +154,6 @@ function HeroSection() {
         <div className="portrait-halo" aria-hidden="true" />
         <div className="orbit orbit-one depth" aria-hidden="true" />
         <div className="orbit orbit-two" aria-hidden="true" />
-        <span className="portrait-coordinate">FIG. 01 / THE CREATOR</span>
         <div className="portrait-scroll">
           <div className="portrait-pointer">
             <img
