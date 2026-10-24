@@ -12,6 +12,11 @@ import {
 } from "lucide-react";
 import { profile, featuredNames, skillGroups } from "./config";
 import { useSceneMotion } from "./useSceneMotion";
+import azMusicIcon from "./assets/azmusic.svg";
+import jarvisIcon from "./assets/jarvis.svg";
+import remoteIcon from "./assets/az-remote-connect.svg";
+
+const featuredIcons = [azMusicIcon, jarvisIcon, remoteIcon];
 const links = [
   ["about", "About"],
   ["toolkit", "Toolkit"],
@@ -171,6 +176,9 @@ function AboutSection() {
   return (
     <section id="about" className="about scene section-pad">
       <Chapter number="01" label="BEHIND THE SCREEN" />
+      <div className="scene-symbol scene-symbol-about" aria-hidden="true">
+        <Code2 size={48} strokeWidth={1.4} />
+      </div>
       <div className="about-layout">
         <h2>
           BEYOND
@@ -203,6 +211,9 @@ function SkillsSection() {
   return (
     <section id="toolkit" className="toolkit scene section-pad">
       <Chapter number="02" label="THE TOOLKIT" />
+      <div className="scene-symbol scene-symbol-toolkit" aria-hidden="true">
+        <Layers size={46} strokeWidth={1.4} />
+      </div>
       <div className="section-heading">
         <h2>
           THINGS I<br />
@@ -246,6 +257,9 @@ function WorkSection() {
   return (
     <section id="work" className="work scene section-pad">
       <Chapter number="03" label="A GLIMPSE OF WHAT I MAKE" />
+      <div className="scene-symbol scene-symbol-work" aria-hidden="true">
+        <Sparkles size={46} strokeWidth={1.4} />
+      </div>
       <div className="section-heading">
         <h2>
           IDEAS INTO
@@ -262,8 +276,8 @@ function WorkSection() {
         {featuredNames.map((name, index) => (
           <div className="featured-card" key={name}>
             <span className="featured-number">0{index + 1} / AZ</span>
-            <span className="featured-glyph" aria-hidden="true">
-              {index === 0 ? "♫" : index === 1 ? "✦" : "↗"}
+            <span className="featured-icon-shell" aria-hidden="true">
+              <img src={featuredIcons[index]} alt="" width="92" height="92" loading="lazy" />
             </span>
             <h3>{name}</h3>
             <span className="featured-line" aria-hidden="true" />
@@ -280,6 +294,9 @@ function ContactSection() {
   return (
     <section id="contact" className="contact scene section-pad">
       <Chapter number="04" label="THE NEXT CHAPTER" />
+      <div className="scene-symbol scene-symbol-contact" aria-hidden="true">
+        <Sparkles size={46} strokeWidth={1.4} />
+      </div>
       <p className="eyebrow">HAVE SOMETHING IN MIND?</p>
       <h2>
         LET’S
@@ -352,4 +369,5 @@ export default function App() {
     </div>
   );
 }
+
 

@@ -5,8 +5,9 @@
   background: #050611;
   font-synthesis: none;
   --cyan: #42e8ff;
-  --muted: #a4aac3;
-  --line: rgba(140, 165, 255, 0.18);
+  --purple: #aa72ff;
+  --muted: #adb0ca;
+  --line: rgba(160, 139, 255, 0.22);
 }
 * {
   box-sizing: border-box;
@@ -177,7 +178,9 @@ h3 {
   z-index: 0;
 }
 .hero::after {
-  background: linear-gradient(90deg, #071329e8 0%, #071329bd 38%, #07132949 72%, #07132920 100%);
+  background:
+    radial-gradient(circle at 88% 25%, #863ced48, transparent 38%),
+    linear-gradient(90deg, #071329e8 0%, #071329bd 38%, #07132949 72%, #07132920 100%);
   z-index: 1;
 }
 .hero-grid {
@@ -256,6 +259,7 @@ h3 {
 }
 .button:hover {
   background: #95f2ff;
+  box-shadow: 0 12px 30px #8747ee3d;
   transform: translateY(-3px);
 }
 .text-link {
@@ -296,13 +300,13 @@ h3 {
 }
 .orbit {
   position: absolute;
-  border: 1px solid #3b79e44d;
+  border: 1px solid #a167ff62;
   border-radius: 50%;
   width: 110%;
   aspect-ratio: 1;
   left: -5%;
   top: 8%;
-  background: radial-gradient(circle, #176bff18, transparent 68%);
+  background: radial-gradient(circle, #8d4dff24, transparent 68%);
   z-index: -1;
 }
 .orbit-two {
@@ -380,9 +384,28 @@ h3 {
   background: var(--line);
   margin-left: 15px;
 }
+.scene-symbol {
+  position: absolute;
+  z-index: 0;
+  width: 86px;
+  height: 86px;
+  display: grid;
+  place-items: center;
+  color: var(--purple);
+  border: 1px solid #a46aff64;
+  border-radius: 24px;
+  background: radial-gradient(circle at 35% 20%, #8144e346, #151331aa 72%);
+  box-shadow: 0 0 48px #8442df29, inset 0 0 20px #8c4de51a;
+  pointer-events: none;
+}
+.scene-symbol-about { top: 125px; right: 8%; }
+.scene-symbol-toolkit { top: 155px; right: 8%; }
+.scene-symbol-work { top: 130px; right: 8%; }
+.scene-symbol-contact { top: 150px; right: 9%; }
 .about {
   min-height: 95svh;
   background:
+    radial-gradient(ellipse at 89% 20%, #7b35cf32, transparent 48%),
     radial-gradient(ellipse at 5% 100%, #17215355, transparent 60%), #090d20;
 }
 .about-layout {
@@ -431,7 +454,8 @@ h3 {
 .toolkit {
   min-height: 100svh;
   background:
-    radial-gradient(ellipse at 90% 80%, #17133c55, transparent 50%), #050611;
+    radial-gradient(ellipse at 88% 77%, #8138db38, transparent 51%),
+    radial-gradient(ellipse at 8% 15%, #4c2c9d22, transparent 48%), #050611;
 }
 .section-heading {
   display: flex;
@@ -463,8 +487,8 @@ h3 {
     background 0.25s;
 }
 .skill-card:hover {
-  border-color: #42e8ff66;
-  background: #10182b;
+  border-color: #aa72ff88;
+  background: #17162d;
 }
 .skill-top {
   display: flex;
@@ -506,7 +530,9 @@ h3 {
   color: #566480;
 }
 .work {
-  background: #080b18;
+  background:
+    radial-gradient(ellipse at 50% 15%, #7134ca31, transparent 56%),
+    #080b18;
 }
 /* A quiet signature of Azeem's work; AZ Appverse holds the full catalog. */
 .featured-strip {
@@ -530,7 +556,7 @@ h3 {
 }
 .featured-card:nth-child(2) {
   background:
-    radial-gradient(circle at 85% 15%, #6345a633, transparent 48%),
+    radial-gradient(circle at 85% 15%, #8a47dc55, transparent 55%),
     linear-gradient(145deg, #17142b, #080d1c);
 }
 .featured-card:nth-child(3) {
@@ -540,19 +566,29 @@ h3 {
 }
 .featured-card:hover {
   transform: translateY(-6px);
-  border-color: #42e8ff66;
+  border-color: #aa72ff88;
 }
 .featured-number {
   color: #b7c7dc;
   font: 11px monospace;
   letter-spacing: 0.12em;
 }
-.featured-glyph {
-  margin: auto 0;
-  color: var(--cyan);
-  font: 92px/1 "Space Grotesk", sans-serif;
-  text-shadow: 0 0 65px #42e8ff55;
-  align-self: center;
+.featured-icon-shell {
+  width: 128px;
+  height: 128px;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid #ae7bff72;
+  border-radius: 30px;
+  background: radial-gradient(circle at 50% 28%, #7441cf4d, #111b36 70%);
+  box-shadow: 0 0 42px #904cff36, inset 0 0 22px #8d54e51f;
+}
+.featured-icon-shell img {
+  width: 92px;
+  height: 92px;
+  object-fit: contain;
+  border-radius: 22px;
 }
 .featured-card h3 {
   font-size: clamp(22px, 2.3vw, 34px);
@@ -561,7 +597,7 @@ h3 {
 .featured-line {
   height: 1px;
   width: 100%;
-  background: linear-gradient(90deg, var(--cyan), transparent);
+  background: linear-gradient(90deg, var(--purple), var(--cyan), transparent);
   opacity: 0.55;
 }
 .work-note {
@@ -574,6 +610,7 @@ h3 {
 .contact {
   min-height: 90svh;
   background:
+    radial-gradient(ellipse at 78% 28%, #8138db36, transparent 48%),
     radial-gradient(ellipse at 70% 70%, #112a5733, transparent 58%), #050611;
   padding-bottom: 60px;
 }
@@ -592,7 +629,7 @@ h3 {
   right: 0;
   top: 0;
   font-size: clamp(60px, 12vw, 170px);
-  color: #28344e;
+  color: #754ab073;
   font-weight: 400;
 }
 .contact-bottom {
@@ -805,8 +842,13 @@ footer > a:last-child {
     min-height: 250px;
     padding: 20px;
   }
-  .featured-glyph {
-    font-size: 70px;
+  .featured-icon-shell {
+    width: 108px;
+    height: 108px;
+  }
+  .featured-icon-shell img {
+    width: 78px;
+    height: 78px;
   }
   .contact h2 {
     font-size: 12vw;
@@ -872,7 +914,12 @@ footer > a:last-child {
     background-position: 57% center;
   }
   .hero::after {
-    background: linear-gradient(180deg, #071329de 0%, #071329bb 48%, #07132955 100%);
+    background:
+      radial-gradient(circle at 85% 70%, #7936d536, transparent 45%),
+      linear-gradient(180deg, #071329de 0%, #071329bb 48%, #07132955 100%);
+  }
+  .scene-symbol {
+    display: none;
   }
   .hero h1 {
     font-size: 12.2vw;
@@ -999,8 +1046,9 @@ footer > a:last-child {
   .featured-card {
     min-height: 190px;
   }
-  .featured-glyph {
-    font-size: 62px;
+  .featured-icon-shell {
+    width: 108px;
+    height: 108px;
   }
   .featured-card h3 {
     font-size: 26px;
@@ -1068,6 +1116,7 @@ footer > a:last-child {
     transform: none !important;
   }
 }
+
 
 
 
