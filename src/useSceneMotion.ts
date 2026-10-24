@@ -51,29 +51,24 @@ export function useSceneMotion() {
             scrub: 1,
           },
         });
-        gsap.utils.toArray<HTMLElement>(".project-art").forEach((panel) => {
-          gsap.fromTo(
-            panel,
-            { scale: 0.96, y: 40 },
-            {
-              scale: 1,
-              y: 0,
-              ease: "none",
-              scrollTrigger: {
-                trigger: panel,
-                start: "top bottom",
-                end: "center center",
-                scrub: 0.7,
-              },
+        const reveal = (selector: string, trigger: string, stagger = 0.12) => {
+          gsap.from(selector, {
+            y: 28,
+            opacity: 0,
+            duration: 0.8,
+            stagger,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger,
+              start: "top 75%",
+              once: true,
             },
-          );
-        });
-        gsap.from(".skill-card", {
-          y: 32,
-          stagger: 0.12,
-          duration: 0.8,
-          scrollTrigger: { trigger: "#toolkit", start: "top 65%" },
-        });
+          });
+        };
+        reveal(".about-copy > *, .about-bottom > *", "#about", 0.11);
+        reveal(".skill-card", "#toolkit", 0.12);
+        reveal(".featured-card", "#work", 0.14);
+        reveal(".contact-bottom > *, .contact-links > *", "#contact", 0.11);
       }, root);
       return () => context.revert();
     });
@@ -122,3 +117,4 @@ export function useSceneMotion() {
   }, []);
   return root;
 }
+
