@@ -69,6 +69,37 @@ export function useSceneMotion() {
         reveal(".skill-card", "#toolkit", 0.12);
         reveal(".featured-card", "#work", 0.14);
         reveal(".contact-bottom > *, .contact-links > *", "#contact", 0.11);
+        gsap.utils.toArray<HTMLElement>(".scene-symbol").forEach((symbol) => {
+          gsap.from(symbol, {
+            x: 42,
+            y: 22,
+            scale: 0.7,
+            rotate: -18,
+            opacity: 0,
+            duration: 1,
+            ease: "back.out(1.5)",
+            scrollTrigger: {
+              trigger: symbol.closest(".scene"),
+              start: "top 72%",
+              once: true,
+            },
+          });
+        });
+        gsap.utils.toArray<HTMLElement>(".featured-icon-shell").forEach((icon) => {
+          gsap.from(icon, {
+            y: 34,
+            scale: 0.55,
+            rotate: -14,
+            opacity: 0,
+            duration: 0.9,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+              trigger: icon.closest(".featured-card"),
+              start: "top 82%",
+              once: true,
+            },
+          });
+        });
       }, root);
       return () => context.revert();
     });
@@ -117,4 +148,5 @@ export function useSceneMotion() {
   }, []);
   return root;
 }
+
 
