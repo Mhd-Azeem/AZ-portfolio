@@ -1,12 +1,13 @@
 export const profile = {
   name: "Mohammed Azeem",
   brand: "AZEEM.DEV",
-  subtitle: "Developer · Creator · Editor",
+  subtitle: "Independent developer building for Android, Windows and the web.",
   about:
-    "I create Android applications, Windows software, digital experiences and cinematic edits. I enjoy bringing ideas to life through technology and design.",
+    "I’m Mohammed Azeem, an independent developer who turns curious ideas into software people can use. I build across Android, Windows and the web, with an eye for clear interfaces and the details that make technology feel human.",
   approach:
-    "Practical software engineering, thoughtful interfaces and creative storytelling. From the first idea to the final interaction, I care about how an experience works — and how it feels.",
+    "I enjoy moving between engineering, design and creative work. My approach is to make a useful first version, learn from it and keep refining how it works and feels.",
   github: "https://github.com/Mhd-Azeem",
+  projectsUrl: "https://mhd-azeem.github.io/WebsiteOfAll/",
   email: "azeemzahira07@gmail.com",
   phone: "+94789781932",
   whatsapp: "+94789781932",
@@ -36,36 +37,6 @@ export const skillGroups = [
     skills: ["Godot & 3D", "Video editing"],
   },
 ];
-// Descriptions are grounded in the repositories. Visuals are illustrative artwork, not app screenshots.
-export const projects = [
-  {
-    title: "WebToApp",
-    category: "ANDROID + WINDOWS",
-    description:
-      "A website-to-Android builder with companion tools for Windows and Android. An evolving foundation for turning websites into native app projects.",
-    stack: ["Android", "Windows", "WebView"],
-    href: "https://github.com/Mhd-Azeem/WebToApp",
-    visual: "web",
-    status: "In development",
-  },
-  {
-    title: "Photo Editor",
-    category: "MOBILE + CREATIVE TOOLS",
-    description:
-      "A native Android photo editor exploring precise adjustments, filters and non-destructive editing through a focused, touch-first interface.",
-    stack: ["Kotlin", "Jetpack Compose", "Canvas"],
-    href: "https://github.com/Mhd-Azeem/Photoeditor",
-    visual: "photo",
-    status: "Source project",
-  },
-  {
-    title: "AZ RemoteConnect",
-    category: "CROSS-PLATFORM EXPLORATION",
-    description:
-      "An early remote-access project connecting Android and Windows ambitions. Starter apps and a signaling skeleton; remote control and streaming are still to come.",
-    stack: ["Kotlin", ".NET 8", "Node.js"],
-    href: "https://github.com/Mhd-Azeem/AZ-RemoteConnect",
-    visual: "remote",
-    status: "Early prototype",
-  },
-];
+// A small visual signature only. AZ Appverse is the complete project catalog.
+export const featuredNames = ["AzMusic", "Jarvis", "AZ Remote Connect"];
+

@@ -21,8 +21,9 @@ Vite's base is `/AZ-portfolio/`. Portrait assets use `import.meta.env.BASE_URL` 
 
 ## Personalize
 
-Edit `src/config.ts` for personal information, skills, project descriptions, repository links and contact information. Portrait paths are relative to `public/`. The existing portrait and contact details are retained from the original portfolio. Project descriptions are based on each repository's README. The project illustrations are original CSS concept artwork, clearly labeled as illustrations rather than app screenshots.
+Edit `src/config.ts` for personal information, skills, the AZ Appverse destination and contact information. Portrait paths are relative to `public/`. The existing portrait and contact details are retained from the original portfolio. The work section is a small visual signature for AzMusic, Jarvis and AZ Remote Connect; AZ Appverse hosts the full project catalog.
 
 ## Motion and accessibility
 
-`src/useSceneMotion.ts` owns and cleans up GSAP timelines and pointer effects. It respects changes to reduced-motion settings. Native anchors, visible focus rings, a skip link, an Escape-dismissable mobile menu and active-section indicators support keyboard navigation. Essential content stays visible even when motion initialization fails. The static fallback inside `index.html` offers biography, project links and contact if JavaScript is disabled or unavailable.
+`src/useSceneMotion.ts` owns and cleans up GSAP timelines and pointer effects. It respects changes to reduced-motion settings. Native anchors, visible focus rings, a skip link, an Escape-dismissable mobile menu and active-section indicators support keyboard navigation. Essential content stays visible even when motion initialization fails. The static fallback inside `index.html` offers biography, the AZ Appverse link and contact if JavaScript is disabled or unavailable.
+

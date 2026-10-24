@@ -3,7 +3,6 @@ import {
   ArrowDown,
   ArrowUp,
   ArrowUpRight,
-  Github,
   Menu,
   X,
   Mail,
@@ -11,7 +10,7 @@ import {
   Layers,
   Sparkles,
 } from "lucide-react";
-import { profile, projects, skillGroups } from "./config";
+import { profile, featuredNames, skillGroups } from "./config";
 import { useSceneMotion } from "./useSceneMotion";
 const links = [
   ["about", "About"],
@@ -104,7 +103,7 @@ function HeroSection() {
       <div className="hero-grid" aria-hidden="true" />
       <div className="hero-copy">
         <p className="eyebrow">
-          <span className="dot" /> DEVELOPER. CREATOR. EXPLORER.
+          <span className="dot" /> INDEPENDENT DEVELOPER / CREATIVE THINKER
         </p>
         <h1>
           MOHAMMED
@@ -120,15 +119,15 @@ function HeroSection() {
           <div>
             <p className="role">{profile.subtitle}</p>
             <p className="muted">
-              Turning ideas into digital experiences.
+              Building useful software with thoughtful interfaces.
               <br />
-              Built with purpose. Made to feel different.
+              Curious by nature. Always learning by making.
             </p>
           </div>
         </div>
         <div className="actions">
-          <a className="button primary" href="#work">
-            Explore My Work <ArrowUpRight size={18} />
+          <a className="button primary" href={profile.projectsUrl} target="_blank" rel="noopener noreferrer">
+            Explore all my projects <ArrowUpRight size={18} />
           </a>
           <a className="text-link" href="#contact">
             Let’s Connect <ArrowUpRight size={17} />
@@ -243,142 +242,37 @@ function SkillsSection() {
     </section>
   );
 }
-function ProjectVisual({ kind }: { kind: string }) {
-  return (
-    <div className={`project-art art-${kind}`} aria-hidden="true">
-      <span className="art-label">
-        {kind === "web"
-          ? "FROM URL TO POSSIBILITY"
-          : kind === "photo"
-            ? "A DIFFERENT PERSPECTIVE"
-            : "DISTANCE IS JUST A NUMBER"}
-      </span>
-      {kind === "web" ? (
-        <div className="browser-illustration">
-          <div className="window-bar">
-            <i />
-            <i />
-            <i />
-            <span>web → app</span>
-          </div>
-          <div className="browser-content">
-            <span className="mini-label">YOUR NEXT IDEA</span>
-            <strong>
-              Hello,
-              <br />
-              <em>possibility.</em>
-            </strong>
-            <div className="mock-button">MAKE IT AN APP ↗</div>
-          </div>
-          <div className="phone-illustration">
-            <span />
-            <strong>
-              W<span>↗</span>
-            </strong>
-            <i />
-          </div>
-        </div>
-      ) : kind === "photo" ? (
-        <div className="photo-illustration">
-          <div className="landscape">
-            <div className="sun" />
-            <div className="mountain back" />
-            <div className="mountain front" />
-          </div>
-          <div className="photo-toolbar">
-            <span>ADJUST</span>
-            <span>FILTERS</span>
-            <span>CROP</span>
-          </div>
-          <div className="slider">
-            <i />
-          </div>
-        </div>
-      ) : (
-        <div className="remote-illustration">
-          <div className="device desktop-device">
-            <span>AZ</span>
-            <small>WINDOWS</small>
-          </div>
-          <div className="connection">
-            <i />
-            <i />
-            <i />
-          </div>
-          <div className="device mobile-device">
-            <span>AZ</span>
-            <small>ANDROID</small>
-          </div>
-        </div>
-      )}
-      <span className="art-footnote">
-        CONCEPT VISUAL / NOT AN APP SCREENSHOT
-      </span>
-    </div>
-  );
-}
-function ProjectPanel({
-  project,
-  index,
-}: {
-  project: (typeof projects)[number];
-  index: number;
-}) {
-  return (
-    <article className={`project-panel ${index % 2 ? "reverse" : ""}`}>
-      <ProjectVisual kind={project.visual} />
-      <div className="project-copy">
-        <span className="project-index">/ 0{index + 1}</span>
-        <p className="eyebrow">{project.category}</p>
-        <h3>{project.title}</h3>
-        <span className="project-status">{project.status}</span>
-        <p className="muted">{project.description}</p>
-        <ul className="stack">
-          {project.stack.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-        <a
-          className="text-link"
-          href={project.href}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Explore the repository <ArrowUpRight size={19} />
-        </a>
-      </div>
-    </article>
-  );
-}
 function WorkSection() {
   return (
     <section id="work" className="work scene section-pad">
-      <Chapter number="03" label="SELECTED EXPLORATIONS" />
+      <Chapter number="03" label="A GLIMPSE OF WHAT I MAKE" />
       <div className="section-heading">
         <h2>
-          SELECTED
+          IDEAS INTO
           <br />
-          <span className="accent">WORK.</span>
+          <span className="accent">EXPERIENCES.</span>
         </h2>
         <p className="muted">
-          Ideas, experiments and digital
+          My interests move across apps, tools and creative experiments.
           <br />
-          experiences brought to life.
+          Here are a few names from that journey.
         </p>
       </div>
-      <div className="projects">
-        {projects.map((project, index) => (
-          <ProjectPanel key={project.title} project={project} index={index} />
+      <div className="featured-strip" aria-label="Examples of my work">
+        {featuredNames.map((name, index) => (
+          <div className="featured-card" key={name}>
+            <span className="featured-number">0{index + 1} / AZ</span>
+            <span className="featured-glyph" aria-hidden="true">
+              {index === 0 ? "♫" : index === 1 ? "✦" : "↗"}
+            </span>
+            <h3>{name}</h3>
+            <span className="featured-line" aria-hidden="true" />
+          </div>
         ))}
       </div>
-      <a
-        className="all-work text-link"
-        href={profile.github}
-        target="_blank"
-        rel="noreferrer"
-      >
-        More experiments on GitHub <Github size={19} />
-      </a>
+      <p className="work-note">
+        See the full collection, current releases and what each project does in AZ Appverse.
+      </p>
     </section>
   );
 }
@@ -458,3 +352,4 @@ export default function App() {
     </div>
   );
 }
+
