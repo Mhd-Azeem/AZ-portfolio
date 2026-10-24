@@ -87,3 +87,19 @@ html{scroll-padding-top:76px}
  footer{line-height:1.6;padding:22px 22px 35px;font-size:.75rem}
  footer span{display:block;margin-bottom:4px}
 }
+
+/* Refined portfolio typography: consistent hierarchy and calmer editorial styling. */
+:root{font-family:Inter,"Segoe UI",Arial,sans-serif;font-optical-sizing:auto;font-kerning:normal}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.logo{font-size:1.05rem;font-weight:800;letter-spacing:.105em}
+.nav nav a{font-weight:550;letter-spacing:.012em}
+.hero h1{font-size:clamp(3.4rem,7vw,8.4rem);line-height:.96;letter-spacing:-.055em;font-weight:800;text-wrap:balance}
+.display-heading{font-size:clamp(2.9rem,6vw,6.6rem);font-weight:750;line-height:1.08;letter-spacing:-.047em;text-wrap:balance}
+.eyebrow,.chapter-topline,.hero-index{font-weight:650;letter-spacing:.12em}
+.tagline{font-weight:550;letter-spacing:.025em}
+.lead,.body-copy{font-weight:400;line-height:1.65;letter-spacing:-.008em}
+.btn{font-weight:650;letter-spacing:.005em}
+.portrait-photo-wrap{will-change:transform;backface-visibility:hidden}
+.portrait-image{backface-visibility:hidden}
+@media(max-width:900px){.hero h1{font-size:clamp(2.65rem,10.5vw,5.1rem);letter-spacing:-.052em}.display-heading{font-size:clamp(2.45rem,8vw,4.8rem)}}
+@media(max-width:480px){.hero h1{font-size:clamp(2.55rem,11vw,3.85rem)}.display-heading{font-size:clamp(2.3rem,8.4vw,3.5rem)}.chapter-topline{letter-spacing:.09em}#contact .display-heading{font-size:clamp(2rem,8vw,3.15rem)}}
