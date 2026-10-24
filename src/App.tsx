@@ -28,6 +28,7 @@ function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("home");
   const toggle = useRef<HTMLButtonElement>(null);
+  const nav = useRef<HTMLElement>(null);
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -46,12 +47,15 @@ function Navbar() {
         toggle.current?.focus();
       }
     };
+    const closeOutside = (event: PointerEvent) => { if (open && !nav.current?.contains(event.target as Node) && !toggle.current?.contains(event.target as Node)) setOpen(false); };
+    document.addEventListener("pointerdown", closeOutside);
     document.addEventListener("keydown", escape);
     return () => {
       observer.disconnect();
+      document.removeEventListener("pointerdown", closeOutside);
       document.removeEventListener("keydown", escape);
     };
-  }, []);
+  }, [open]);
   return (
     <header className="navbar">
       <a className="brand" href="#home" aria-label="Azeem, back to top">
@@ -71,6 +75,7 @@ function Navbar() {
         {open ? <X /> : <Menu />}
       </button>
       <nav
+        ref={nav}
         id="navigation"
         className={open ? "open" : ""}
         aria-label="Main navigation"
@@ -358,6 +363,7 @@ export default function App() {
       </a>
       <div className="ambient-pointer" aria-hidden="true" />
       <Navbar />
+      <div className="scroll-progress" aria-hidden="true" />
       <main id="main">
         <HeroSection />
         <AboutSection />
