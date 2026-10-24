@@ -1252,3 +1252,52 @@ h2{font-weight:600;letter-spacing:-.058em}
  .portrait-backlight,.portrait-halo{will-change:auto;transform:none!important;filter:none}
  .navbar{transition:none}
 }
+
+/* Floating liquid-glass navigation: no full-width header background. */
+.navbar,.navbar.is-scrolled{
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  height:92px;
+  padding:12px clamp(16px,4.8vw,90px);
+  gap:12px;
+  pointer-events:none;
+}
+.navbar > *{pointer-events:auto}
+.navbar .brand,.navbar .nav-caption,.navbar .nav-contact,.navbar nav{
+  background:linear-gradient(145deg,rgba(39,32,82,.72),rgba(15,19,47,.6) 56%,rgba(79,42,124,.46));
+  border:1px solid rgba(199,159,255,.33);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.19),inset 0 -1px 0 rgba(143,105,245,.09),0 9px 30px rgba(7,5,28,.3),0 0 20px rgba(146,83,255,.12);
+  backdrop-filter:blur(18px) saturate(145%);
+  -webkit-backdrop-filter:blur(18px) saturate(145%);
+  border-radius:18px;
+}
+.navbar .brand{padding:9px 17px;letter-spacing:-2px;line-height:1.3}
+.navbar .nav-caption{padding:15px 17px;color:#e1d9f2;font-size:10px}
+.navbar nav{gap:5px;padding:5px 8px}
+.navbar nav a{padding:12px 16px;border-radius:12px;font-size:13px;color:#e1dcf2;transition:background .25s ease,box-shadow .25s ease,color .25s ease}
+.navbar nav a:hover,.navbar nav a[aria-current]{background:linear-gradient(135deg,rgba(166,101,255,.3),rgba(85,198,255,.11));box-shadow:inset 0 1px 0 #e0c5ff30;color:#fff}
+.navbar nav a span{bottom:3px}
+.navbar .nav-contact{padding:14px 19px;font-weight:700;color:#f7eeff;gap:12px}
+.navbar .nav-contact:hover{border-color:#d3a5ff99;box-shadow:0 0 27px #a75aff55,inset 0 1px 0 #ffffff45}
+.navbar .menu-toggle{background:linear-gradient(135deg,#45296fbd,#13162bd9);border:1px solid #bb8aff77;box-shadow:inset 0 1px 0 #ffffff3b,0 8px 24px #140b2b80;backdrop-filter:blur(16px)}
+@media(max-width:900px){
+ .navbar{height:75px;padding:9px 4%;gap:8px}
+ .navbar .nav-caption{padding:13px 10px}
+ .navbar .brand{padding:7px 12px}
+ .navbar nav{gap:2px}
+ .navbar nav a{padding:10px 11px}
+ .navbar .nav-contact{padding:12px}
+}
+@media(max-width:700px){
+ .navbar{height:75px;justify-content:space-between;flex-wrap:nowrap}
+ .navbar .brand{padding:8px 13px}
+ .navbar .nav-caption{padding:13px 12px;margin-right:auto}
+ .navbar .menu-toggle{display:grid;place-items:center;min-width:46px;min-height:46px;border-radius:15px}
+ .navbar nav{position:absolute;top:calc(100% + 5px);left:4%;right:4%;width:auto;margin:0;padding:10px;display:none;flex-direction:column;gap:4px;border-radius:19px;background:linear-gradient(145deg,#21133bf0,#0b1227f2);border:1px solid #bc8bff80;box-shadow:0 16px 45px #08051ed9;backdrop-filter:blur(22px)}
+ .navbar nav.open{display:flex}
+ .navbar nav a{padding:13px 16px;min-height:45px;border-radius:12px;border-bottom:0}
+ .navbar .nav-contact{display:none}
+}
+@media(max-width:370px){.navbar .nav-caption{font-size:8px;padding:13px 8px}.navbar{gap:5px}}
+@media(prefers-reduced-transparency:reduce){.navbar .brand,.navbar .nav-caption,.navbar .nav-contact,.navbar nav{background:#14152f}}
