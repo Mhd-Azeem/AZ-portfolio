@@ -48,7 +48,7 @@ export function useSceneMotion() {
           { selector: ".about-copy > *, .about-bottom > *", trigger: "#about" },
           { selector: ".skill-card", trigger: "#toolkit" },
           { selector: ".featured-card", trigger: "#work" },
-          { selector: ".contact-bottom > *, .contact-links > *", trigger: "#contact" },
+
         ];
         groups.forEach(({ selector, trigger }) => {
           gsap.utils.toArray<HTMLElement>(selector).forEach((item, index) => {
@@ -58,6 +58,27 @@ export function useSceneMotion() {
             });
           });
         });
+
+        // The contact card arrives from beyond the visible edge, then stays readable.
+        // Animate a dedicated card only; no other ScrollTrigger touches its transform.
+        const contactCard = element.querySelector<HTMLElement>(".contact-card");
+        const contactSection = element.querySelector<HTMLElement>("#contact");
+        if (contactCard && contactSection) {
+          const enterCard = () => {
+            const mobile = window.matchMedia("(max-width: 700px)").matches;
+            gsap.fromTo(contactCard,
+              { x: mobile ? 0 : window.innerWidth, y: mobile ? window.innerHeight : 0 },
+              { x: 0, y: 0, duration: 1.35, ease: "power3.out", overwrite: "auto", clearProps: "transform" }
+            );
+          };
+          ScrollTrigger.create({
+            trigger: contactSection,
+            start: "top 72%",
+            onEnter: enterCard,
+            onEnterBack: enterCard,
+            onLeaveBack: () => gsap.set(contactCard, { clearProps: "transform" }),
+          });
+        }
 
         gsap.utils.toArray<HTMLElement>(".scene-symbol").forEach((symbol) => {
           gsap.fromTo(symbol, { x: 48, rotate: -14, scale: 0.85 }, {
