@@ -33,3 +33,35 @@ body{background:#040a16}
 .portrait-image{max-height:100%;object-fit:contain}
 @media(max-width:900px){.portrait-stage{height:min(56svh,560px);min-height:340px}.portrait-photo-wrap{mask-image:linear-gradient(to bottom,#000 0%,#000 86%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 86%,transparent 100%)}}
 @media(max-width:480px){.portrait-stage{height:49svh;min-height:315px}}
+
+/* Reference-inspired editorial chapter composition; no forced scrolling or continuous 3D. */
+:root{--cyan:#61dfff;--line:#67c6ff45}
+html{scroll-padding-top:76px}
+.nav{height:74px;border-bottom:1px solid #6cbcff28;box-shadow:0 12px 45px #02081335}
+.logo{font-size:1rem;letter-spacing:.19em}
+.hero{min-height:100svh;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:clamp(12px,3vw,55px);padding:115px clamp(25px,7vw,125px) 90px;background:radial-gradient(ellipse at 78% 43%,#114d836b,transparent 49%),radial-gradient(ellipse at 8% 95%,#092e5765,transparent 56%),#050b18}
+.hero-grid{position:absolute;inset:0;opacity:.13;pointer-events:none;background-image:linear-gradient(#4cbaff32 1px,transparent 1px),linear-gradient(90deg,#4cbaff32 1px,transparent 1px);background-size:100px 100px;mask-image:linear-gradient(to bottom,transparent,#000 40%,transparent)}
+.hero-side-note{position:absolute;right:18px;top:52%;writing-mode:vertical-rl;letter-spacing:.22em;font-size:.62rem;color:#83bcde8c}
+.hero-index,.hero-rule,.chapter-topline{display:flex;align-items:center;justify-content:space-between;gap:14px;text-transform:uppercase;font-size:.68rem;letter-spacing:.18em;color:#8ab4d0}
+.hero-index{margin-bottom:30px;justify-content:flex-start;gap:12px}
+.hero-index>span:last-child{margin-left:auto}
+.live-dot{width:7px;height:7px;flex:none;border-radius:50%;background:#50dbff;box-shadow:0 0 12px #50dbff}
+.hero-rule{border-top:1px solid var(--line);padding-top:13px;margin-top:8px}
+.hero h1{font-size:clamp(3.5rem,7.5vw,9rem);line-height:.9;letter-spacing:-.07em;margin-bottom:26px}
+.hero .tagline{margin-top:30px}
+.chapter-panel{width:min(100%,1170px);border:1px solid #64bfff35;border-radius:clamp(22px,3vw,42px);padding:clamp(28px,5vw,72px);background:linear-gradient(145deg,#0b2545a6,#061427dd 66%,#081a31a6);box-shadow:0 25px 85px #0003,inset 0 1px 0 #b0eaff17}
+.chapter-topline{border-bottom:1px solid #7acaff30;padding-bottom:22px;margin-bottom:clamp(40px,7vh,90px);width:100%}
+.chapter-panel .eyebrow{margin-bottom:22px}
+.display-heading{font-size:clamp(3.2rem,6.8vw,7.5rem);max-width:1060px}
+.editorial-note{margin-top:35px;display:flex;align-items:center;gap:clamp(20px,5vw,70px);border-radius:14px;background:#0b315a77}
+.note-marker{font-size:clamp(2rem,5vw,4rem);font-weight:900;white-space:nowrap;letter-spacing:-.09em;color:#54caff}
+.skill-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.skill{min-height:112px;border-radius:12px;flex-direction:row;align-items:center;justify-content:flex-start;gap:24px;background:linear-gradient(100deg,#12365a8a,#091c32a1);font-size:clamp(.9rem,1.4vw,1.15rem)}
+.skill-num{font-size:.8rem;min-width:30px}
+.project-section .chapter-panel,.content-section:last-of-type .chapter-panel{min-height:65svh;justify-content:center}
+.content-section{padding:clamp(80px,10vh,140px) clamp(16px,5vw,85px);border-top:none;box-shadow:none}
+.content-section::before{height:1px;background:linear-gradient(90deg,transparent,#52cfff7d,transparent)}
+.scroll-indicator{bottom:23px}
+@media(max-width:900px){.hero{grid-template-columns:1fr;gap:0;padding:95px 20px 85px}.hero-side-note{display:none}.hero-index{margin-bottom:20px}.hero h1{font-size:clamp(2.7rem,11vw,5rem)}.hero-rule{font-size:.55rem}.portrait-stage{order:1;height:47svh;min-height:300px}.hero-content{order:2}.chapter-panel{padding:30px 24px}.chapter-topline{margin-bottom:45px}.display-heading{font-size:clamp(2.8rem,9vw,5.2rem)}.content-section{padding:80px 14px}.hero-index>span:last-child{display:none}}
+@media(max-width:480px){.portrait-stage{height:43svh;min-height:290px}.hero h1{font-size:clamp(2.5rem,12vw,4.2rem)}.hero-rule span:first-child{max-width:70%}.chapter-panel{padding:27px 20px;border-radius:22px}.chapter-topline{font-size:.55rem}.display-heading{font-size:clamp(2.55rem,10vw,4rem)}.skill-grid{grid-template-columns:1fr;gap:9px}.skill{min-height:75px;padding:18px}.editorial-note{gap:15px;padding:20px}.note-marker{font-size:2rem}.content-section{min-height:80svh}}
+@media(prefers-reduced-motion:reduce){.chapter-panel,.reveal{opacity:1!important;transform:none!important}}
