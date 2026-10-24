@@ -1120,3 +1120,50 @@ footer > a:last-child {
 
 
 
+
+/* AZ visual refresh: neon-violet accents layered over the existing cyan identity. */
+:root{--purple:#b06aff;--violet-bright:#c28bff;--line:rgba(183,130,255,.3)}
+.navbar{border-bottom-color:#9b5aff55;box-shadow:0 8px 36px #5b23b21a}
+.brand span{color:var(--violet-bright);text-shadow:0 0 18px #a85cff77}
+.hero{background-color:#0c1030}
+.hero::after{background:radial-gradient(ellipse at 77% 36%,#9d3dff48,transparent 53%),radial-gradient(ellipse at 20% 85%,#7033d43a,transparent 48%),linear-gradient(90deg,#080e26eb 0%,#10133bc2 48%,#170d3999 100%)}
+.hero h1>span{color:#58e9ff;text-shadow:0 0 28px #944bff60}
+.accent{color:#a978ff;text-shadow:0 0 28px #8545ed44}
+.dot{background:#b874ff;box-shadow:0 0 15px #a45affaa}
+.small-cross,.chapter-number{color:#c28bff}
+.primary{background:linear-gradient(115deg,#a15bff 0%,#7b52f7 53%,#42d9f6 130%);color:#fff;box-shadow:0 8px 28px #8238e14d}
+.button.primary:hover{background:linear-gradient(115deg,#b977ff,#9069ff 60%,#58dffc);box-shadow:0 12px 34px #a05aff77}
+.text-link:hover,.contact-links a:hover{color:#c58bff;border-color:#ad73ff}
+a:focus-visible,button:focus-visible{outline-color:#c58bff}
+::selection{background:#9952ff;color:#fff}
+.orbit{border-color:#c17aff8a;background:radial-gradient(circle,#a450ff32,transparent 70%);box-shadow:0 0 52px #913fff25}
+.orbit-two{border-color:#d1a1ff6b}
+.portrait{filter:drop-shadow(0 0 24px #a157ff66) drop-shadow(0 0 20px #1c8fff33)}
+.portrait-tag,.skill-card,.featured-card{border-color:#a46aff55}
+.skill-card:hover,.featured-card:hover{border-color:#c18affaa;box-shadow:0 12px 44px #7934e63d}
+.featured-icon-shell{box-shadow:0 0 52px #9d52ff55,inset 0 0 26px #ad65ff22}
+.featured-icon-shell img{filter:drop-shadow(0 0 10px #a45dff66)}
+.featured-line,.process-line{background:linear-gradient(90deg,#ae65ff,#59dcff,transparent)}
+.scene-symbol{color:#d0a2ff;box-shadow:0 0 50px #9845ed44}
+.about{background:radial-gradient(ellipse at 83% 22%,#8739e54a,transparent 50%),#090d20}
+.toolkit{background:radial-gradient(ellipse at 84% 75%,#a044f53f,transparent 54%),#050611}
+.contact{background:radial-gradient(ellipse at 78% 25%,#a044f555,transparent 50%),#050611}
+.contact-arrow{color:#a46aff8c}
+.ambient-pointer{background:radial-gradient(350px circle at var(--pointer-x,-500px) var(--pointer-y,-500px),#a76aff12,transparent 85%)}
+
+/* Mobile hero: portrait is the first scene element, all text/actions follow below. */
+@media(max-width:600px){
+.hero{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;min-height:100svh;padding:90px 7% 95px;gap:0}
+.hero .portrait-stage{order:0;flex:0 0 auto;width:100%;max-width:390px;height:clamp(300px,76vw,430px);margin:0 auto 22px;align-self:center}
+.hero .hero-copy{order:1;width:100%;position:relative;z-index:4}
+.hero .hero-bottom{order:2;position:relative;inset:auto;width:100%;margin-top:45px;padding-top:20px}
+.hero h1{font-size:clamp(2.8rem,12.1vw,5rem);line-height:.98;letter-spacing:-.075em;margin-bottom:24px}
+.hero-copy>.eyebrow{margin-bottom:18px;line-height:1.6}
+.hero-description{gap:12px}
+.actions{margin-top:25px}
+.portrait-coordinate{top:5px}
+.portrait-tag{bottom:0}
+.hero::after{background:radial-gradient(ellipse at 50% 26%,#8434e86b,transparent 53%),linear-gradient(180deg,#0a102cd9,#101337a6 55%,#090d22df)}
+}
+@media(max-width:380px){.hero{padding-top:84px}.hero .portrait-stage{height:290px}.hero h1{font-size:12vw}.actions{gap:14px}.button{padding:14px 16px}}
+@media(prefers-reduced-motion:reduce){.portrait{filter:drop-shadow(0 0 18px #9d55ff55)}}
