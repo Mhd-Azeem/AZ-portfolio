@@ -9,9 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@react-three/fiber": "^9.1.2",
-    "@react-three/drei": "^10.0.7",
-    "three": "^0.175.0",
     "gsap": "^3.12.7",
     "lucide-react": "^0.468.0",
     "react": "^19.0.0",
@@ -20,7 +17,6 @@
   "devDependencies": {
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@types/three": "^0.175.0",
     "@vitejs/plugin-react": "^4.4.1",
     "typescript": "~5.7.3",
     "vite": "^6.2.0"
