@@ -27,3 +27,9 @@ body{background:#040a16}
 @media(max-width:900px){.hero{padding:100px 24px 85px;gap:8px}.portrait-stage{height:min(51svh,520px);min-height:320px;width:100%;max-width:540px;margin-inline:auto}.portrait-image{max-height:100%;max-width:100%}.content-section{padding:105px 24px;min-height:90svh}}
 @media(max-width:480px){.hero{padding-top:95px}.portrait-stage{height:45svh;min-height:290px}.portrait-image{max-height:100%;max-width:100%}.portrait-aura{width:90%}.content-section{padding:95px 22px;min-height:85svh}}
 @media(prefers-reduced-motion:reduce){.portrait-photo-wrap,.portrait-image,.portrait-aura{transform:none!important}.skill{transition:none}}
+
+/* Blend the original portrait's hard lower edge into the hero instead of showing a rectangular cut. */
+.portrait-photo-wrap{overflow:visible;mask-image:linear-gradient(to bottom,#000 0%,#000 82%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 82%,transparent 100%)}
+.portrait-image{max-height:100%;object-fit:contain}
+@media(max-width:900px){.portrait-stage{height:min(56svh,560px);min-height:340px}.portrait-photo-wrap{mask-image:linear-gradient(to bottom,#000 0%,#000 86%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 86%,transparent 100%)}}
+@media(max-width:480px){.portrait-stage{height:49svh;min-height:315px}}
