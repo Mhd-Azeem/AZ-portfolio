@@ -7,6 +7,7 @@ import {
   X,
   Mail,
   MessageCircle,
+  Phone,
   Github,
   Rocket,
   Users,
@@ -295,10 +296,12 @@ function WorkSection() {
               <img src={featuredIcons[index]} alt="" width="92" height="92" loading="lazy" />
             </span>
             <h3>{name}</h3>
+            <p className="featured-description">{["Music discovery and listening experience.","An experimental personal AI assistant.","Remote desktop connectivity tools."][index]}</p>
             <span className="featured-line" aria-hidden="true" />
           </div>
         ))}
       </div>
+      <a className="button primary work-project-link" href={profile.projectsUrl} target="_blank" rel="noopener noreferrer">Explore all projects <ArrowUpRight size={18}/></a>
       <p className="work-note">
         See the full collection, current releases and what each project does in AZ Appverse.
       </p>
@@ -334,7 +337,12 @@ function ContactSection() {
             </a>
             <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="contact-method">
               <span className="contact-method-icon"><MessageCircle size={25} aria-hidden="true" /></span>
-              <span className="contact-method-copy"><strong>WhatsApp</strong><small>Start a chat</small></span>
+              <span className="contact-method-copy"><strong>WhatsApp</strong><small>{profile.whatsapp}</small></span>
+              <ArrowUpRight size={22} aria-hidden="true" />
+            </a>
+            <a href={`tel:${profile.phone}`} className="contact-method">
+              <span className="contact-method-icon"><Phone size={25} aria-hidden="true" /></span>
+              <span className="contact-method-copy"><strong>Call me</strong><small>{profile.phone}</small></span>
               <ArrowUpRight size={22} aria-hidden="true" />
             </a>
             <a href={profile.github} target="_blank" rel="noopener noreferrer" className="contact-method">
