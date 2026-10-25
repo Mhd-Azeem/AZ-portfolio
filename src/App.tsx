@@ -14,6 +14,10 @@ import {
   Code2,
   Layers,
   Sparkles,
+  Download,
+  Music2,
+  Monitor,
+  Bot,
 } from "lucide-react";
 import { profile, featuredNames, skillGroups } from "./config";
 import { useSceneMotion } from "./useSceneMotion";
@@ -22,6 +26,75 @@ import jarvisIcon from "./assets/jarvis.svg";
 import remoteIcon from "./assets/az-remote-connect.svg";
 
 const featuredIcons = [azMusicIcon, jarvisIcon, remoteIcon];
+const cvUrl = `${import.meta.env.BASE_URL}images/mohammed-azeem-cv.png`;
+const projects = [
+  { name: "AzMusic", category: "Android / Windows", status: "In development", description: "A music listening experience with artist discovery, playlists, playback controls and a personal library.", features: ["Artist discovery", "Music playback", "Playlists & library"], repo: "https://github.com/Mhd-Azeem", preview: "music" },
+  { name: "Jarvis", category: "AI / Assistant", status: "Coming soon", description: "A personal assistant project exploring useful automation, conversational tools and a unified interface.", features: ["Assistant interface", "Automation ideas", "Cross-device vision"], repo: "https://github.com/Mhd-Azeem", preview: "assistant" },
+  { name: "AZ Remote Connect", category: "Android / Windows", status: "In development", description: "A remote-access software project designed to connect devices through a simple, secure interface.", features: ["Remote connectivity", "Desktop access", "Device management"], repo: "https://github.com/Mhd-Azeem", preview: "remote" },
+] as const;
+
+function useModalAccessibility(open: boolean, onClose: () => void) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const previousFocus = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    if (!open) return;
+    previousFocus.current = document.activeElement as HTMLElement;
+    const oldOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+      if (event.key !== "Tab" || !dialogRef.current) return;
+      const elements = Array.from(dialogRef.current.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),[tabindex="0"]'));
+      if (!elements.length) return;
+      const first = elements[0], last = elements[elements.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => { document.body.style.overflow = oldOverflow; document.removeEventListener("keydown", onKey); previousFocus.current?.focus(); };
+  }, [open, onClose]);
+  return { dialogRef, closeRef };
+}
+
+function CvModal({ onClose }: { onClose: () => void }) {
+  const { dialogRef, closeRef } = useModalAccessibility(true, onClose);
+  return <div className="az-modal-backdrop" onMouseDown={e => { if (e.target === e.currentTarget) onClose(); }}>
+    <div className="az-modal az-cv-modal" ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="cv-title">
+      <div className="az-modal-header"><h2 id="cv-title">MY CV <span> / MOHAMMED AZEEM</span></h2>
+        <div className="az-modal-tools"><a href={cvUrl} download="Mohammed-Azeem-CV.png" className="az-modal-download"><Download size={17}/> Download</a><button ref={closeRef} type="button" className="az-modal-close" onClick={onClose} aria-label="Close CV"><X size={23}/></button></div>
+      </div>
+      <div className="az-cv-scroll"><img src={cvUrl} alt="Mohammed Azeem CV with personal details, projects, contact information and skill levels" width="1024" height="1536" /></div>
+    </div>
+  </div>;
+}
+
+function ProjectPreview({ type, number }: { type: string; number: number }) {
+  return <div className={`az-project-preview az-preview-${type} az-preview-${number}`} aria-label="Illustrative interface concept, not an application screenshot">
+    <div className="az-preview-top"><span className="az-preview-dot"/><span className="az-preview-dot"/><span className="az-preview-dot"/><span>AZ / CONCEPT</span></div>
+    {type === "music" ? <div className="az-preview-content"><Music2 size={38}/><strong>{number === 1 ? "Now Playing" : "Discover Music"}</strong><div className="az-preview-track"/><div className="az-preview-bars"><i/><i/><i/><i/><i/></div></div>
+      : type === "assistant" ? <div className="az-preview-content"><Bot size={40}/><strong>{number === 1 ? "Hello, I'm Jarvis" : "Your Assistant"}</strong><div className="az-preview-chat"/><div className="az-preview-chat short"/></div>
+      : <div className="az-preview-content"><Monitor size={40}/><strong>{number === 1 ? "Remote Desktop" : "Connect Devices"}</strong><div className="az-preview-screen"/><div className="az-preview-track"/></div>}
+    <span className="az-preview-caption">Illustrative preview · Screenshots coming soon</span>
+  </div>;
+}
+
+function ProjectModal({ index, onClose }: { index: number; onClose: () => void }) {
+  const project = projects[index];
+  const { dialogRef, closeRef } = useModalAccessibility(true, onClose);
+  return <div className="az-modal-backdrop" onMouseDown={e => { if (e.target === e.currentTarget) onClose(); }}>
+    <div className="az-modal az-project-modal" ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="project-title">
+      <div className="az-modal-header"><span className="az-modal-kicker">PROJECT 0{index + 1} / AZ</span><button ref={closeRef} type="button" className="az-modal-close" onClick={onClose} aria-label="Close project details"><X size={23}/></button></div>
+      <div className="az-project-modal-body"><div className="az-project-modal-title"><img src={featuredIcons[index]} alt="" width="62" height="62"/><div><h2 id="project-title">{project.name}</h2><p>{project.category} · {project.status}</p></div></div>
+      <p className="az-project-summary">{project.description}</p>
+      <div className="az-project-previews"><ProjectPreview type={project.preview} number={1}/><ProjectPreview type={project.preview} number={2}/></div>
+      <h3 className="az-project-subtitle">Highlights</h3><ul className="az-project-features">{project.features.map(item => <li key={item}>{item}</li>)}</ul>
+      <a className="az-project-more" href={profile.projectsUrl} target="_blank" rel="noopener noreferrer">Explore the project catalog <ArrowUpRight size={18}/></a>
+      </div>
+    </div>
+  </div>;
+}
 const links = [
   ["about", "About"],
   ["toolkit", "Toolkit"],
@@ -117,7 +190,7 @@ function Chapter({ number, label }: { number: string; label: string }) {
     </div>
   );
 }
-function HeroSection() {
+function HeroSection({ onViewCv }: { onViewCv: () => void }) {
   return (
     <section id="home" className="hero scene">
       <div className="hero-grid" aria-hidden="true" />
@@ -149,9 +222,9 @@ function HeroSection() {
           <a className="button primary" href={profile.projectsUrl} target="_blank" rel="noopener noreferrer">
             Explore all my projects <ArrowUpRight size={18} />
           </a>
-          <a className="button hero-connect-button" href={`${import.meta.env.BASE_URL}images/mohammed-azeem-cv.png`} target="_blank" rel="noopener noreferrer" aria-label="View my CV image">
+          <button type="button" className="button hero-connect-button" onClick={onViewCv} aria-haspopup="dialog">
             View My CV <ArrowUpRight size={18} aria-hidden="true" />
-          </a>
+          </button>
         </div>
       </div>
       <div className="portrait-stage">
@@ -271,7 +344,7 @@ function SkillsSection() {
     </section>
   );
 }
-function WorkSection() {
+function WorkSection({ onProjectClick }: { onProjectClick: (index: number) => void }) {
   return (
     <section id="work" className="work scene section-pad">
       <Chapter number="03" label="A GLIMPSE OF WHAT I MAKE" />
@@ -292,15 +365,15 @@ function WorkSection() {
       </div>
       <div className="featured-strip" aria-label="Examples of my work">
         {featuredNames.map((name, index) => (
-          <div className="featured-card" key={name}>
+          <button type="button" className="featured-card az-featured-button" key={name} onClick={() => onProjectClick(index)} aria-haspopup="dialog" aria-label={`View details about ${name}`}>
             <span className="featured-number">0{index + 1} / AZ</span>
             <span className="featured-icon-shell" aria-hidden="true">
               <img src={featuredIcons[index]} alt="" width="92" height="92" loading="lazy" />
             </span>
             <h3>{name}</h3>
             <p className="featured-description">{["Music discovery and listening experience.","An experimental personal AI assistant.","Remote desktop connectivity tools."][index]}</p>
-            <span className="featured-line" aria-hidden="true" />
-          </div>
+            <span className="featured-line" aria-hidden="true" /><span className="az-featured-more">View details <ArrowUpRight size={16}/></span>
+          </button>
         ))}
       </div>
       <a className="button primary work-project-link" href={profile.projectsUrl} target="_blank" rel="noopener noreferrer">Explore all projects <ArrowUpRight size={18}/></a>
@@ -380,6 +453,8 @@ function Footer() {
 }
 export default function App() {
   const root = useSceneMotion();
+  const [showCv, setShowCv] = useState(false);
+  const [activeProject, setActiveProject] = useState<number | null>(null);
   return (
     <div ref={root}>
       <a className="skip-link" href="#main">
@@ -389,13 +464,15 @@ export default function App() {
       <Navbar />
       <div className="scroll-progress" aria-hidden="true" />
       <main id="main">
-        <HeroSection />
+        <HeroSection onViewCv={() => setShowCv(true)} />
         <AboutSection />
         <SkillsSection />
-        <WorkSection />
+        <WorkSection onProjectClick={setActiveProject} />
         <ContactSection />
       </main>
       <Footer />
+      {showCv && <CvModal onClose={() => setShowCv(false)} />}
+      {activeProject !== null && <ProjectModal index={activeProject} onClose={() => setActiveProject(null)} />}
     </div>
   );
 }
