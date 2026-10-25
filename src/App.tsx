@@ -149,8 +149,8 @@ function HeroSection() {
           <a className="button primary" href={profile.projectsUrl} target="_blank" rel="noopener noreferrer">
             Explore all my projects <ArrowUpRight size={18} />
           </a>
-          <a className="text-link" href="#contact">
-            Let’s Connect <ArrowUpRight size={17} />
+          <a className="button hero-connect-button" href="#contact">
+            Let’s Connect <ArrowUpRight size={18} aria-hidden="true" />
           </a>
         </div>
       </div>
@@ -206,7 +206,6 @@ function AboutSection() {
           <p className="muted">{profile.approach}</p>
           <div className="about-profile-details" aria-label="Personal profile"><span>Born 2007</span><span>Kandy, Sri Lanka</span><span>A/L Completed</span><span>English · Tamil · Sinhala</span></div>
           <p className="about-interests">App Development · UI/UX Design · Video Editing · Web Development · Photography</p>
-          <a className="about-cv-link" href={`${import.meta.env.BASE_URL}images/mohammed-azeem-cv.svg`} target="_blank" rel="noopener noreferrer" aria-label="View Mohammed Azeem curriculum vitae as an image">View My CV <ArrowUpRight size={18} aria-hidden="true" /></a>
           <a className="text-link" href="#toolkit">
             A look inside my toolkit <ArrowDown size={17} />
           </a>
