@@ -1,0 +1,13 @@
+import { readFileSync } from "node:fs";
+import assert from "node:assert/strict";
+const app = readFileSync("src/App.tsx","utf8");
+const config = readFileSync("src/config.ts","utf8");
+const css = readFileSync("src/style.css","utf8");
+const html = readFileSync("index.html","utf8");
+for (const id of ["home","about","toolkit","work","contact"]) assert.match(app,new RegExp('id="'+id+'"'),"Missing navigation section: "+id);
+for (const link of ["mailto:","tel:","https://wa.me/"]) assert.ok(app.includes(link),"Missing contact action "+link);
+assert.match(app,/profile\.projectsUrl/,"Missing projects destination");
+assert.match(config,/azeemzahira07@gmail\.com/,"Missing contact email");
+assert.match(css,/@media\(max-width:700px\)/,"Missing narrow-screen styles");
+assert.match(html,/<meta\s+name="viewport"/,"Missing viewport meta tag");
+console.log("Portfolio structural smoke checks passed.");
