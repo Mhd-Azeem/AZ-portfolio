@@ -1420,3 +1420,49 @@ h2{font-weight:600;letter-spacing:-.058em}
   .hero{padding-top:85px}
   .hero .portrait-stage{height:clamp(270px,55vw,380px)}
 }
+
+/* 2026 responsive quality pass: keep cinematic treatment without mobile overflow. */
+html{scroll-padding-top:80px}
+body{overflow-x:clip}
+.hero,.scene,.section-pad,.contact-showcase,.featured-strip{min-width:0}
+.featured-description{max-width:27ch;color:#aebbd1;font-size:.9rem;line-height:1.55;margin:12px auto 0}
+.work-project-link{display:inline-flex;margin:26px 0 0}
+.contact-method:focus-visible,.contact-card-cta:focus-visible,.button:focus-visible,.menu-toggle:focus-visible{outline:3px solid #72d7ff;outline-offset:3px}
+@media(max-width:700px){
+ .section-pad{padding-left:clamp(18px,5vw,30px);padding-right:clamp(18px,5vw,30px)}
+ .contact{min-height:unset;padding-top:78px;padding-bottom:70px}
+ .contact-showcase{margin-top:25px;gap:20px}
+ .contact .contact-intro h2{font-size:clamp(2.5rem,10vw,4rem);line-height:1.04}
+ .contact-description{line-height:1.55;margin-bottom:18px}
+ .contact-interests{gap:7px}
+ .contact-card{padding:15px}
+ .contact-card-header{margin-bottom:13px}
+ .contact-methods{gap:8px}
+ .contact-method{min-height:66px;padding:10px 12px;gap:11px}
+ .contact-method-icon{width:43px;height:43px}
+ .contact-method-icon svg{width:21px;height:21px}
+ .contact-card-cta{min-height:52px;margin-top:12px}
+ .contact-card-footer{margin-top:13px;padding-top:12px}
+ .featured-strip{max-width:100%}
+ .featured-card{min-width:0}
+}
+@media(max-width:380px){.contact-availability{font-size:10px}.contact-method-copy small{font-size:11px}}
+@media(hover:none),(prefers-reduced-motion:reduce){
+ .contact-method:hover,.contact-card-cta:hover{transform:none}
+}
+
+/* Personal profile and CV image action */
+.about-profile-details{display:flex;flex-wrap:wrap;gap:9px;margin:20px 0 12px}
+.about-profile-details span{border:1px solid rgba(95,201,255,.26);border-radius:999px;background:rgba(31,93,143,.15);padding:8px 12px;color:#d7ebfa;font-size:13px}
+.about-interests{color:#9bbbd1;font-size:14px;line-height:1.7;margin:0 0 16px}
+.about-cv-link{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 20px;border-radius:14px;background:linear-gradient(110deg,#1469db,#0ba7eb);border:1px solid #73d9ff;color:#fff;text-decoration:none;font-weight:700;box-shadow:0 7px 22px rgba(4,119,223,.22);margin:4px 18px 14px 0;transition:transform .2s,box-shadow .2s}
+.about-cv-link:hover{transform:translateY(-2px);box-shadow:0 9px 28px rgba(4,119,223,.36)}
+.about-cv-link:focus-visible{outline:3px solid #8beaff;outline-offset:4px}
+@media(max-width:520px){.about-profile-details{gap:7px}.about-profile-details span{font-size:12px;padding:7px 10px}.about-cv-link{width:100%;margin-right:0}}
+@media(prefers-reduced-motion:reduce){.about-cv-link{transition:none}.about-cv-link:hover{transform:none}}
+
+/* Secondary hero CTA next to the projects button */
+.hero .actions .hero-connect-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid rgba(111,213,255,.5);background:rgba(18,58,94,.38);color:#e8f8ff;box-shadow:none;white-space:nowrap}
+.hero .actions .hero-connect-button:hover{background:rgba(24,90,138,.55);border-color:#7bdaff}
+.hero .actions .hero-connect-button:focus-visible{outline:3px solid #8beaff;outline-offset:4px}
+@media(max-width:520px){.hero .actions .hero-connect-button{width:100%;min-height:50px}}

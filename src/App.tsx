@@ -7,6 +7,7 @@ import {
   X,
   Mail,
   MessageCircle,
+  Phone,
   Github,
   Rocket,
   Users,
@@ -148,8 +149,8 @@ function HeroSection() {
           <a className="button primary" href={profile.projectsUrl} target="_blank" rel="noopener noreferrer">
             Explore all my projects <ArrowUpRight size={18} />
           </a>
-          <a className="text-link" href="#contact">
-            Let’s Connect <ArrowUpRight size={17} />
+          <a className="button hero-connect-button" href={`${import.meta.env.BASE_URL}images/mohammed-azeem-cv.png`} target="_blank" rel="noopener noreferrer" aria-label="View my CV image">
+            View My CV <ArrowUpRight size={18} aria-hidden="true" />
           </a>
         </div>
       </div>
@@ -203,6 +204,8 @@ function AboutSection() {
         <div className="about-copy">
           <p className="intro">{profile.about}</p>
           <p className="muted">{profile.approach}</p>
+          <div className="about-profile-details" aria-label="Personal profile"><span>Born 2007</span><span>Kandy, Sri Lanka</span><span>A/L Completed</span><span>English · Tamil · Sinhala</span></div>
+          <p className="about-interests">App Development · UI/UX Design · Video Editing · Web Development · Photography</p>
           <a className="text-link" href="#toolkit">
             A look inside my toolkit <ArrowDown size={17} />
           </a>
@@ -295,10 +298,12 @@ function WorkSection() {
               <img src={featuredIcons[index]} alt="" width="92" height="92" loading="lazy" />
             </span>
             <h3>{name}</h3>
+            <p className="featured-description">{["Music discovery and listening experience.","An experimental personal AI assistant.","Remote desktop connectivity tools."][index]}</p>
             <span className="featured-line" aria-hidden="true" />
           </div>
         ))}
       </div>
+      <a className="button primary work-project-link" href={profile.projectsUrl} target="_blank" rel="noopener noreferrer">Explore all projects <ArrowUpRight size={18}/></a>
       <p className="work-note">
         See the full collection, current releases and what each project does in AZ Appverse.
       </p>
@@ -306,7 +311,7 @@ function WorkSection() {
   );
 }
 function ContactSection() {
-  const whatsapp = `https://wa.me/${profile.whatsapp.replace(/\\D/g, "")}`;
+  const whatsapp = `https://wa.me/${profile.whatsapp.replace(/\D/g, "")}`;
   return (
     <section id="contact" className="contact scene section-pad">
       <Chapter number="04" label="THE NEXT CHAPTER" />
@@ -334,7 +339,12 @@ function ContactSection() {
             </a>
             <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="contact-method">
               <span className="contact-method-icon"><MessageCircle size={25} aria-hidden="true" /></span>
-              <span className="contact-method-copy"><strong>WhatsApp</strong><small>Start a chat</small></span>
+              <span className="contact-method-copy"><strong>WhatsApp</strong><small>{profile.whatsapp}</small></span>
+              <ArrowUpRight size={22} aria-hidden="true" />
+            </a>
+            <a href={`tel:${profile.phone}`} className="contact-method">
+              <span className="contact-method-icon"><Phone size={25} aria-hidden="true" /></span>
+              <span className="contact-method-copy"><strong>Call me</strong><small>{profile.phone}</small></span>
               <ArrowUpRight size={22} aria-hidden="true" />
             </a>
             <a href={profile.github} target="_blank" rel="noopener noreferrer" className="contact-method">
