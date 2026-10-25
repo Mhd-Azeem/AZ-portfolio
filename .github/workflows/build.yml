@@ -19,6 +19,7 @@ jobs:
           node-version: "22"
           cache: npm
       - run: npm ci
+      - run: node scripts/smoke-check.mjs
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
