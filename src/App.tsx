@@ -149,7 +149,7 @@ function HeroSection() {
           <a className="button primary" href={profile.projectsUrl} target="_blank" rel="noopener noreferrer">
             Explore all my projects <ArrowUpRight size={18} />
           </a>
-          <a className="button hero-connect-button" href={`${import.meta.env.BASE_URL}images/mohammed-azeem-cv.svg`} target="_blank" rel="noopener noreferrer" aria-label="View my CV image">
+          <a className="button hero-connect-button" href={`${import.meta.env.BASE_URL}images/mohammed-azeem-cv.png`} target="_blank" rel="noopener noreferrer" aria-label="View my CV image">
             View My CV <ArrowUpRight size={18} aria-hidden="true" />
           </a>
         </div>
