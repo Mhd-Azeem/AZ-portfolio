@@ -1460,3 +1460,9 @@ body{overflow-x:clip}
 .about-cv-link:focus-visible{outline:3px solid #8beaff;outline-offset:4px}
 @media(max-width:520px){.about-profile-details{gap:7px}.about-profile-details span{font-size:12px;padding:7px 10px}.about-cv-link{width:100%;margin-right:0}}
 @media(prefers-reduced-motion:reduce){.about-cv-link{transition:none}.about-cv-link:hover{transform:none}}
+
+/* Secondary hero CTA next to the projects button */
+.hero .actions .hero-connect-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid rgba(111,213,255,.5);background:rgba(18,58,94,.38);color:#e8f8ff;box-shadow:none;white-space:nowrap}
+.hero .actions .hero-connect-button:hover{background:rgba(24,90,138,.55);border-color:#7bdaff}
+.hero .actions .hero-connect-button:focus-visible{outline:3px solid #8beaff;outline-offset:4px}
+@media(max-width:520px){.hero .actions .hero-connect-button{width:100%;min-height:50px}}
