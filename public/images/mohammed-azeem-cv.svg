@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1273" viewBox="0 0 900 1273" role="img" aria-labelledby="title desc">
+<title id="title">Mohammed Azeem — Curriculum Vitae</title><desc id="desc">Professional CV with personal profile, skills, languages, projects and contact details.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#061426"/><stop offset="1" stop-color="#0a203a"/></linearGradient><linearGradient id="accent"><stop stop-color="#32d4ff"/><stop offset="1" stop-color="#4887ff"/></linearGradient></defs>
+<rect width="900" height="1273" fill="url(#bg)"/><path d="M0 0H900V12H0Z" fill="url(#accent)"/><circle cx="820" cy="95" r="165" fill="#184775" opacity=".18"/><path d="M52 180H848" stroke="#28516c"/><path d="M52 1192H848" stroke="#28516c"/>
+<g font-family="Arial,Helvetica,sans-serif"><text x="52" y="78" fill="#55d7ff" font-size="18" letter-spacing="5">CURRICULUM VITAE  /  2026</text>
+<text x="52" y="132" fill="white" font-size="48" font-weight="bold">MOHAMMED AZEEM</text><text x="54" y="166" fill="#9ddff5" font-size="22">Independent Developer &amp; Creative Editor</text>
+<text x="52" y="225" fill="#55d7ff" font-size="18" font-weight="bold" letter-spacing="3">PROFILE</text>
+<text x="52" y="260" fill="#e2edf8" font-size="19">Independent developer and creative editor based in Kandy, Sri Lanka.</text>
+<text x="52" y="288" fill="#e2edf8" font-size="19">Interested in building useful apps, intuitive web experiences, and visual media.</text>
+<text x="52" y="340" fill="#55d7ff" font-size="18" font-weight="bold" letter-spacing="3">PERSONAL DETAILS</text>
+<text x="52" y="376" fill="white" font-size="19">Birth year</text><text x="240" y="376" fill="#bed6eb" font-size="19">2007</text>
+<text x="52" y="411" fill="white" font-size="19">Location</text><text x="240" y="411" fill="#bed6eb" font-size="19">Kandy, Sri Lanka</text>
+<text x="52" y="446" fill="white" font-size="19">Education</text><text x="240" y="446" fill="#bed6eb" font-size="19">A/L Completed</text>
+<text x="52" y="481" fill="white" font-size="19">Languages</text><text x="240" y="481" fill="#bed6eb" font-size="19">English · Tamil · Sinhala</text>
+<path d="M52 516H848" stroke="#28516c"/>
+<text x="52" y="565" fill="#55d7ff" font-size="18" font-weight="bold" letter-spacing="3">AREAS OF INTEREST</text>
+<text x="52" y="603" fill="#e2edf8" font-size="19">App Development  ·  UI/UX Design  ·  Web Development</text>
+<text x="52" y="635" fill="#e2edf8" font-size="19">Video Editing  ·  Photography</text>
+<path d="M52 670H848" stroke="#28516c"/>
+<text x="52" y="719" fill="#55d7ff" font-size="18" font-weight="bold" letter-spacing="3">SELECTED PROJECTS</text>
+<text x="52" y="757" fill="white" font-size="21" font-weight="bold">AzMusic</text><text x="52" y="783" fill="#bed6eb" font-size="17">Music listening application for Android and Windows</text>
+<text x="52" y="827" fill="white" font-size="21" font-weight="bold">Jarvis</text><text x="52" y="853" fill="#bed6eb" font-size="17">Personal assistant software project</text>
+<text x="52" y="897" fill="white" font-size="21" font-weight="bold">AZ Remote Connect</text><text x="52" y="923" fill="#bed6eb" font-size="17">Remote connectivity software project</text>
+<path d="M52 959H848" stroke="#28516c"/>
+<text x="52" y="1007" fill="#55d7ff" font-size="18" font-weight="bold" letter-spacing="3">CONTACT</text>
+<text x="52" y="1046" fill="#e2edf8" font-size="19">Email</text><text x="240" y="1046" fill="white" font-size="19">azeemzahira07@gmail.com</text>
+<text x="52" y="1081" fill="#e2edf8" font-size="19">Phone</text><text x="240" y="1081" fill="white" font-size="19">+94 78 978 1932</text>
+<text x="52" y="1116" fill="#e2edf8" font-size="19">GitHub</text><text x="240" y="1116" fill="white" font-size="19">github.com/Mhd-Azeem</text>
+<text x="52" y="1230" fill="#83a7c5" font-size="16">AZEEM_DEVELOPER  ·  SOFTWARE / DESIGN / CREATIVE</text>
+</g></svg>
