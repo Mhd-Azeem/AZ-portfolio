@@ -1420,3 +1420,33 @@ h2{font-weight:600;letter-spacing:-.058em}
   .hero{padding-top:85px}
   .hero .portrait-stage{height:clamp(270px,55vw,380px)}
 }
+
+/* 2026 responsive quality pass: keep cinematic treatment without mobile overflow. */
+html{scroll-padding-top:80px}
+body{overflow-x:clip}
+.hero,.scene,.section-pad,.contact-showcase,.featured-strip{min-width:0}
+.featured-description{max-width:27ch;color:#aebbd1;font-size:.9rem;line-height:1.55;margin:12px auto 0}
+.work-project-link{display:inline-flex;margin:26px 0 0}
+.contact-method:focus-visible,.contact-card-cta:focus-visible,.button:focus-visible,.menu-toggle:focus-visible{outline:3px solid #72d7ff;outline-offset:3px}
+@media(max-width:700px){
+ .section-pad{padding-left:clamp(18px,5vw,30px);padding-right:clamp(18px,5vw,30px)}
+ .contact{min-height:unset;padding-top:78px;padding-bottom:70px}
+ .contact-showcase{margin-top:25px;gap:20px}
+ .contact .contact-intro h2{font-size:clamp(2.5rem,10vw,4rem);line-height:1.04}
+ .contact-description{line-height:1.55;margin-bottom:18px}
+ .contact-interests{gap:7px}
+ .contact-card{padding:15px}
+ .contact-card-header{margin-bottom:13px}
+ .contact-methods{gap:8px}
+ .contact-method{min-height:66px;padding:10px 12px;gap:11px}
+ .contact-method-icon{width:43px;height:43px}
+ .contact-method-icon svg{width:21px;height:21px}
+ .contact-card-cta{min-height:52px;margin-top:12px}
+ .contact-card-footer{margin-top:13px;padding-top:12px}
+ .featured-strip{max-width:100%}
+ .featured-card{min-width:0}
+}
+@media(max-width:380px){.contact-availability{font-size:10px}.contact-method-copy small{font-size:11px}}
+@media(hover:none),(prefers-reduced-motion:reduce){
+ .contact-method:hover,.contact-card-cta:hover{transform:none}
+}
