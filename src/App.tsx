@@ -309,7 +309,7 @@ function WorkSection() {
   );
 }
 function ContactSection() {
-  const whatsapp = `https://wa.me/${profile.whatsapp.replace(/\\D/g, "")}`;
+  const whatsapp = `https://wa.me/${profile.whatsapp.replace(/\D/g, "")}`;
   return (
     <section id="contact" className="contact scene section-pad">
       <Chapter number="04" label="THE NEXT CHAPTER" />
