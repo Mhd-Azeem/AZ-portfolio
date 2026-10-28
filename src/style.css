@@ -1415,7 +1415,8 @@ footer > a:last-child {
 }
 @media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: auto;
+    /* ScrollTrigger can restore an inline smooth-scroll value after refresh. */
+    scroll-behavior: auto !important;
   }
   *,
   *::before,
