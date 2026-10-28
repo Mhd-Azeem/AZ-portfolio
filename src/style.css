@@ -1561,3 +1561,16 @@ body{overflow-x:clip}
   .hero .portrait-stage{isolation:isolate}
   .hero::before{background-position:center center}
 }
+
+/* Toolkit expansion: readable, balanced cards for longer confirmed skill lists. */
+.skills-grid{align-items:stretch}
+.skill-card{height:100%;min-width:0;display:flex;flex-direction:column}
+.skill-card ul{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.skill-card li{overflow-wrap:anywhere;line-height:1.5}
+.skill-card .card-corner{margin-top:auto}
+@media(max-width:900px){.skill-card{padding:clamp(20px,3vw,30px)}}
+@media(max-width:650px){
+ .skills-grid{grid-template-columns:minmax(0,1fr);gap:15px}
+ .skill-card{min-height:0;padding:22px}
+ .skill-card ul{gap:9px}
+}
