@@ -8,6 +8,6 @@ for (const id of ["home","about","toolkit","work","contact"]) assert.match(app,n
 for (const link of ["mailto:","tel:","https://wa.me/"]) assert.ok(app.includes(link),"Missing contact action "+link);
 assert.match(app,/profile\.projectsUrl/,"Missing projects destination");
 assert.match(config,/azeemzahira07@gmail\.com/,"Missing contact email");
-assert.match(css,/@media\(max-width:700px\)/,"Missing narrow-screen styles");
+assert.match(css,/@media\s*\(max-width:\s*700px\)/,"Missing narrow-screen styles");
 assert.match(html,/<meta\s+name="viewport"/,"Missing viewport meta tag");
 console.log("Portfolio structural smoke checks passed.");

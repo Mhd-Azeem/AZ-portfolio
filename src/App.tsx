@@ -28,9 +28,40 @@ import remoteIcon from "./assets/az-remote-connect.svg";
 const featuredIcons = [azMusicIcon, jarvisIcon, remoteIcon];
 const cvUrl = `${import.meta.env.BASE_URL}images/mohammed-azeem-cv.png`;
 const projects = [
-  { name: "AzMusic", category: "Android / Windows", status: "In development", description: "A music listening experience with artist discovery, playlists, playback controls and a personal library.", features: ["Artist discovery", "Music playback", "Playlists & library"], repo: "https://github.com/Mhd-Azeem", preview: "music" },
-  { name: "Jarvis", category: "AI / Assistant", status: "Coming soon", description: "A personal assistant project exploring useful automation, conversational tools and a unified interface.", features: ["Assistant interface", "Automation ideas", "Cross-device vision"], repo: "https://github.com/Mhd-Azeem", preview: "assistant" },
-  { name: "AZ Remote Connect", category: "Android / Windows", status: "In development", description: "A remote-access software project designed to connect devices through a simple, secure interface.", features: ["Remote connectivity", "Desktop access", "Device management"], repo: "https://github.com/Mhd-Azeem", preview: "remote" },
+  {
+    name: "AzMusic",
+    category: "Android / Windows",
+    status: "In development",
+    description:
+      "A music listening experience with artist discovery, playlists, playback controls and a personal library.",
+    features: ["Artist discovery", "Music playback", "Playlists & library"],
+    repo: "https://github.com/Mhd-Azeem",
+    preview: "music",
+  },
+  {
+    name: "Jarvis",
+    category: "AI / Assistant",
+    status: "Coming soon",
+    description:
+      "A personal assistant project exploring useful automation, conversational tools and a unified interface.",
+    features: [
+      "Assistant interface",
+      "Automation ideas",
+      "Cross-device vision",
+    ],
+    repo: "https://github.com/Mhd-Azeem",
+    preview: "assistant",
+  },
+  {
+    name: "AZ Remote Connect",
+    category: "Android / Windows",
+    status: "In development",
+    description:
+      "A remote-access software project designed to connect devices through a simple, secure interface.",
+    features: ["Remote connectivity", "Desktop access", "Device management"],
+    repo: "https://github.com/Mhd-Azeem",
+    preview: "remote",
+  },
 ] as const;
 
 function useModalAccessibility(open: boolean, onClose: () => void) {
@@ -42,63 +73,226 @@ function useModalAccessibility(open: boolean, onClose: () => void) {
     previousFocus.current = document.activeElement as HTMLElement;
     const oldOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    const background = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        "main, header, footer, .skip-link",
+      ),
+    );
+    const previousInert = background.map((element) => element.inert);
+    background.forEach((element) => {
+      element.inert = true;
+    });
     closeRef.current?.focus();
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
       if (event.key !== "Tab" || !dialogRef.current) return;
-      const elements = Array.from(dialogRef.current.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),[tabindex="0"]'));
+      const elements = Array.from(
+        dialogRef.current.querySelectorAll<HTMLElement>(
+          'a[href],button:not([disabled]),[tabindex="0"]',
+        ),
+      );
       if (!elements.length) return;
-      const first = elements[0], last = elements[elements.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      const first = elements[0],
+        last = elements[elements.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
-    return () => { document.body.style.overflow = oldOverflow; document.removeEventListener("keydown", onKey); previousFocus.current?.focus(); };
+    return () => {
+      document.body.style.overflow = oldOverflow;
+      background.forEach((element, index) => {
+        element.inert = previousInert[index];
+      });
+      document.removeEventListener("keydown", onKey);
+      previousFocus.current?.focus();
+    };
   }, [open, onClose]);
   return { dialogRef, closeRef };
 }
 
 function CvModal({ onClose }: { onClose: () => void }) {
   const { dialogRef, closeRef } = useModalAccessibility(true, onClose);
-  return <div className="az-modal-backdrop" onMouseDown={e => { if (e.target === e.currentTarget) onClose(); }}>
-    <div className="az-modal az-cv-modal" ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="cv-title">
-      <div className="az-modal-header"><h2 id="cv-title">MY CV <span> / MOHAMMED AZEEM</span></h2>
-        <div className="az-modal-tools"><a href={cvUrl} download="Mohammed-Azeem-CV.png" className="az-modal-download"><Download size={17}/> Download</a><button ref={closeRef} type="button" className="az-modal-close" onClick={onClose} aria-label="Close CV"><X size={23}/></button></div>
+  return (
+    <div
+      className="az-modal-backdrop"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div
+        className="az-modal az-cv-modal"
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cv-title"
+      >
+        <div className="az-modal-header">
+          <h2 id="cv-title">
+            MY CV <span> / MOHAMMED AZEEM</span>
+          </h2>
+          <div className="az-modal-tools">
+            <a
+              href={cvUrl}
+              download="Mohammed-Azeem-CV.png"
+              className="az-modal-download"
+            >
+              <Download size={17} /> Download
+            </a>
+            <button
+              ref={closeRef}
+              type="button"
+              className="az-modal-close"
+              onClick={onClose}
+              aria-label="Close CV"
+            >
+              <X size={23} />
+            </button>
+          </div>
+        </div>
+        <div className="az-cv-scroll">
+          <img
+            src={cvUrl}
+            alt="Mohammed Azeem CV with personal details, projects, contact information and skill levels"
+            width="1024"
+            height="1536"
+          />
+        </div>
       </div>
-      <div className="az-cv-scroll"><img src={cvUrl} alt="Mohammed Azeem CV with personal details, projects, contact information and skill levels" width="1024" height="1536" /></div>
     </div>
-  </div>;
+  );
 }
 
 function ProjectPreview({ type, number }: { type: string; number: number }) {
-  return <div className={`az-project-preview az-preview-${type} az-preview-${number}`} aria-label="Illustrative interface concept, not an application screenshot">
-    <div className="az-preview-top"><span className="az-preview-dot"/><span className="az-preview-dot"/><span className="az-preview-dot"/><span>AZ / CONCEPT</span></div>
-    {type === "music" ? <div className="az-preview-content"><Music2 size={38}/><strong>{number === 1 ? "Now Playing" : "Discover Music"}</strong><div className="az-preview-track"/><div className="az-preview-bars"><i/><i/><i/><i/><i/></div></div>
-      : type === "assistant" ? <div className="az-preview-content"><Bot size={40}/><strong>{number === 1 ? "Hello, I'm Jarvis" : "Your Assistant"}</strong><div className="az-preview-chat"/><div className="az-preview-chat short"/></div>
-      : <div className="az-preview-content"><Monitor size={40}/><strong>{number === 1 ? "Remote Desktop" : "Connect Devices"}</strong><div className="az-preview-screen"/><div className="az-preview-track"/></div>}
-    <span className="az-preview-caption">Illustrative preview · Screenshots coming soon</span>
-  </div>;
+  return (
+    <div
+      className={`az-project-preview az-preview-${type} az-preview-${number}`}
+      aria-label="Illustrative interface concept, not an application screenshot"
+    >
+      <div className="az-preview-top">
+        <span className="az-preview-dot" />
+        <span className="az-preview-dot" />
+        <span className="az-preview-dot" />
+        <span>AZ / CONCEPT</span>
+      </div>
+      {type === "music" ? (
+        <div className="az-preview-content">
+          <Music2 size={38} />
+          <strong>{number === 1 ? "Now Playing" : "Discover Music"}</strong>
+          <div className="az-preview-track" />
+          <div className="az-preview-bars">
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+          </div>
+        </div>
+      ) : type === "assistant" ? (
+        <div className="az-preview-content">
+          <Bot size={40} />
+          <strong>
+            {number === 1 ? "Hello, I'm Jarvis" : "Your Assistant"}
+          </strong>
+          <div className="az-preview-chat" />
+          <div className="az-preview-chat short" />
+        </div>
+      ) : (
+        <div className="az-preview-content">
+          <Monitor size={40} />
+          <strong>{number === 1 ? "Remote Desktop" : "Connect Devices"}</strong>
+          <div className="az-preview-screen" />
+          <div className="az-preview-track" />
+        </div>
+      )}
+      <span className="az-preview-caption">
+        Illustrative preview · Screenshots coming soon
+      </span>
+    </div>
+  );
 }
 
-function ProjectModal({ index, onClose }: { index: number; onClose: () => void }) {
+function ProjectModal({
+  index,
+  onClose,
+}: {
+  index: number;
+  onClose: () => void;
+}) {
   const project = projects[index];
   const { dialogRef, closeRef } = useModalAccessibility(true, onClose);
-  return <div className="az-modal-backdrop" onMouseDown={e => { if (e.target === e.currentTarget) onClose(); }}>
-    <div className="az-modal az-project-modal" ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="project-title">
-      <div className="az-modal-header"><span className="az-modal-kicker">PROJECT 0{index + 1} / AZ</span><button ref={closeRef} type="button" className="az-modal-close" onClick={onClose} aria-label="Close project details"><X size={23}/></button></div>
-      <div className="az-project-modal-body"><div className="az-project-modal-title"><img src={featuredIcons[index]} alt="" width="62" height="62"/><div><h2 id="project-title">{project.name}</h2><p>{project.category} · {project.status}</p></div></div>
-      <p className="az-project-summary">{project.description}</p>
-      <div className="az-project-previews"><ProjectPreview type={project.preview} number={1}/><ProjectPreview type={project.preview} number={2}/></div>
-      <h3 className="az-project-subtitle">Highlights</h3><ul className="az-project-features">{project.features.map(item => <li key={item}>{item}</li>)}</ul>
-      <a className="az-project-more" href={profile.projectsUrl} target="_blank" rel="noopener noreferrer">Explore the project catalog <ArrowUpRight size={18}/></a>
+  return (
+    <div
+      className="az-modal-backdrop"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div
+        className="az-modal az-project-modal"
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-title"
+      >
+        <div className="az-modal-header">
+          <span className="az-modal-kicker">PROJECT 0{index + 1} / AZ</span>
+          <button
+            ref={closeRef}
+            type="button"
+            className="az-modal-close"
+            onClick={onClose}
+            aria-label="Close project details"
+          >
+            <X size={23} />
+          </button>
+        </div>
+        <div className="az-project-modal-body">
+          <div className="az-project-modal-title">
+            <img src={featuredIcons[index]} alt="" width="62" height="62" />
+            <div>
+              <h2 id="project-title">{project.name}</h2>
+              <p>
+                {project.category} · {project.status}
+              </p>
+            </div>
+          </div>
+          <p className="az-project-summary">{project.description}</p>
+          <p className="preview-disclosure">
+            Interface studies · Illustrations only, not screenshots of the
+            applications.
+          </p>
+          <div className="az-project-previews">
+            <ProjectPreview type={project.preview} number={1} />
+            <ProjectPreview type={project.preview} number={2} />
+          </div>
+          <h3 className="az-project-subtitle">Highlights</h3>
+          <ul className="az-project-features">
+            {project.features.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <a
+            className="az-project-more"
+            href={profile.projectsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Explore the project catalog <ArrowUpRight size={18} />
+          </a>
+        </div>
       </div>
     </div>
-  </div>;
+  );
 }
 const links = [
-  ["about", "About"],
-  ["toolkit", "Toolkit"],
   ["work", "Work"],
+  ["toolkit", "Toolkit"],
+  ["about", "About"],
   ["contact", "Contact"],
 ];
 
@@ -129,7 +323,14 @@ function Navbar() {
         toggle.current?.focus();
       }
     };
-    const closeOutside = (event: PointerEvent) => { if (open && !nav.current?.contains(event.target as Node) && !toggle.current?.contains(event.target as Node)) setOpen(false); };
+    const closeOutside = (event: PointerEvent) => {
+      if (
+        open &&
+        !nav.current?.contains(event.target as Node) &&
+        !toggle.current?.contains(event.target as Node)
+      )
+        setOpen(false);
+    };
     document.addEventListener("pointerdown", closeOutside);
     document.addEventListener("keydown", escape);
     return () => {
@@ -142,7 +343,12 @@ function Navbar() {
   return (
     <header className={`navbar ${scrolled ? "is-scrolled" : ""}`}>
       <a className="brand" href="#home" aria-label="Azeem, back to top">
-        <img src={`${import.meta.env.BASE_URL}images/az-logo.svg`} alt="" width="54" height="54" />
+        <img
+          src={`${import.meta.env.BASE_URL}images/az-logo.svg`}
+          alt=""
+          width="54"
+          height="54"
+        />
       </a>
       <a className="nav-caption" href="#home">
         {profile.brand}
@@ -175,7 +381,13 @@ function Navbar() {
           </a>
         ))}
       </nav>
-      <a className="nav-contact" href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="Open Mohammed Azeem GitHub profile">
+      <a
+        className="nav-contact"
+        href={profile.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open Mohammed Azeem GitHub profile"
+      >
         GitHub <ArrowUpRight size={15} />
       </a>
     </header>
@@ -219,10 +431,15 @@ function HeroSection({ onViewCv }: { onViewCv: () => void }) {
           </div>
         </div>
         <div className="actions">
-          <a className="button primary" href={profile.projectsUrl} target="_blank" rel="noopener noreferrer">
-            Explore all my projects <ArrowUpRight size={18} />
+          <a className="button primary" href="#work">
+            Explore my work <ArrowUpRight size={18} />
           </a>
-          <button type="button" className="button hero-connect-button" onClick={onViewCv} aria-haspopup="dialog">
+          <button
+            type="button"
+            className="button hero-connect-button"
+            onClick={onViewCv}
+            aria-haspopup="dialog"
+          >
             View My CV <ArrowUpRight size={18} aria-hidden="true" />
           </button>
         </div>
@@ -235,7 +452,9 @@ function HeroSection({ onViewCv }: { onViewCv: () => void }) {
         <div className="portrait-scroll">
           <div className="portrait-pointer">
             <img
-              src={`${import.meta.env.BASE_URL}${profile.portraitUrl}`}
+              src={`${import.meta.env.BASE_URL}images/azeem-800.webp`}
+              srcSet={`${import.meta.env.BASE_URL}images/azeem-480.webp 480w, ${import.meta.env.BASE_URL}images/azeem-800.webp 800w`}
+              sizes="(max-width: 700px) 85vw, 42vw"
               alt="Mohammed Azeem"
               width="1122"
               height="1402"
@@ -252,7 +471,7 @@ function HeroSection({ onViewCv }: { onViewCv: () => void }) {
         </span>
       </div>
       <div className="hero-bottom">
-        <a href="#about">
+        <a href="#work">
           SCROLL TO DISCOVER <ArrowDown size={16} />
         </a>
         <span>CODE × DESIGN × MOTION</span>
@@ -264,7 +483,7 @@ function HeroSection({ onViewCv }: { onViewCv: () => void }) {
 function AboutSection() {
   return (
     <section id="about" className="about scene section-pad">
-      <Chapter number="01" label="BEHIND THE SCREEN" />
+      <Chapter number="03" label="BEHIND THE SCREEN" />
       <div className="scene-symbol scene-symbol-about" aria-hidden="true">
         <Code2 size={48} strokeWidth={1.4} />
       </div>
@@ -277,8 +496,16 @@ function AboutSection() {
         <div className="about-copy">
           <p className="intro">{profile.about}</p>
           <p className="muted">{profile.approach}</p>
-          <div className="about-profile-details" aria-label="Personal profile"><span>Born 2007</span><span>Kandy, Sri Lanka</span><span>A/L Completed</span><span>English · Tamil · Sinhala</span></div>
-          <p className="about-interests">App Development · UI/UX Design · Video Editing · Web Development · Photography</p>
+          <div className="about-profile-details" aria-label="Personal profile">
+            <span>Born 2007</span>
+            <span>Kandy, Sri Lanka</span>
+            <span>A/L Completed</span>
+            <span>English · Tamil · Sinhala</span>
+          </div>
+          <p className="about-interests">
+            App Development · UI/UX Design · Video Editing · Web Development ·
+            Photography
+          </p>
           <a className="text-link" href="#toolkit">
             A look inside my toolkit <ArrowDown size={17} />
           </a>
@@ -344,10 +571,14 @@ function SkillsSection() {
     </section>
   );
 }
-function WorkSection({ onProjectClick }: { onProjectClick: (index: number) => void }) {
+function WorkSection({
+  onProjectClick,
+}: {
+  onProjectClick: (index: number) => void;
+}) {
   return (
     <section id="work" className="work scene section-pad">
-      <Chapter number="03" label="A GLIMPSE OF WHAT I MAKE" />
+      <Chapter number="01" label="FEATURED PROJECTS" />
       <div className="scene-symbol scene-symbol-work" aria-hidden="true">
         <Sparkles size={46} strokeWidth={1.4} />
       </div>
@@ -365,20 +596,55 @@ function WorkSection({ onProjectClick }: { onProjectClick: (index: number) => vo
       </div>
       <div className="featured-strip" aria-label="Examples of my work">
         {featuredNames.map((name, index) => (
-          <button type="button" className="featured-card az-featured-button" key={name} onClick={() => onProjectClick(index)} aria-haspopup="dialog" aria-label={`View details about ${name}`}>
-            <span className="featured-number">0{index + 1} / AZ</span>
-            <span className="featured-icon-shell" aria-hidden="true">
-              <img src={featuredIcons[index]} alt="" width="92" height="92" loading="lazy" />
+          <button
+            type="button"
+            className="featured-card az-featured-button"
+            key={name}
+            onClick={() => onProjectClick(index)}
+            aria-haspopup="dialog"
+            aria-label={`View details about ${name}`}
+          >
+            <span className="featured-number">
+              0{index + 1} / {projects[index].category}
             </span>
+            <span className="featured-icon-shell" aria-hidden="true">
+              <img
+                src={featuredIcons[index]}
+                alt=""
+                width="92"
+                height="92"
+                loading="lazy"
+              />
+            </span>
+            <span className="project-status">{projects[index].status}</span>
             <h3>{name}</h3>
-            <p className="featured-description">{["Music discovery and listening experience.","An experimental personal AI assistant.","Remote desktop connectivity tools."][index]}</p>
-            <span className="featured-line" aria-hidden="true" /><span className="az-featured-more">View details <ArrowUpRight size={16}/></span>
+            <p className="featured-description">
+              {
+                [
+                  "Music discovery and listening experience.",
+                  "An experimental personal AI assistant.",
+                  "Remote desktop connectivity tools.",
+                ][index]
+              }
+            </p>
+            <span className="featured-line" aria-hidden="true" />
+            <span className="az-featured-more">
+              View details <ArrowUpRight size={16} />
+            </span>
           </button>
         ))}
       </div>
-      <a className="button primary work-project-link" href={profile.projectsUrl} target="_blank" rel="noopener noreferrer">Explore all projects <ArrowUpRight size={18}/></a>
+      <a
+        className="button primary work-project-link"
+        href={profile.projectsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Explore all projects <ArrowUpRight size={18} />
+      </a>
       <p className="work-note">
-        See the full collection, current releases and what each project does in AZ Appverse.
+        See the full collection, current releases and what each project does in
+        AZ Appverse.
       </p>
     </section>
   );
@@ -391,45 +657,97 @@ function ContactSection() {
       <div className="contact-showcase">
         <div className="contact-intro">
           <p className="eyebrow">04 / CONTACT · OPEN TO IDEAS</p>
-          <h2>LET’S BUILD<br /><span className="accent">SOMETHING.</span></h2>
-          <p className="contact-description">Have an idea, a project, or just want to connect?<br />I’d love to hear from you.</p>
-          <div className="contact-interests" aria-label="Reasons to get in touch">
-            <span><Rocket size={18} aria-hidden="true" /> New projects</span>
-            <span><Users size={18} aria-hidden="true" /> Collaboration</span>
-            <span><MessageCircle size={18} aria-hidden="true" /> Say hello</span>
+          <h2>
+            LET’S BUILD
+            <br />
+            <span className="accent">SOMETHING.</span>
+          </h2>
+          <p className="contact-description">
+            Have an idea, a project, or just want to connect?
+            <br />
+            I’d love to hear from you.
+          </p>
+          <div
+            className="contact-interests"
+            aria-label="Reasons to get in touch"
+          >
+            <span>
+              <Rocket size={18} aria-hidden="true" /> New projects
+            </span>
+            <span>
+              <Users size={18} aria-hidden="true" /> Collaboration
+            </span>
+            <span>
+              <MessageCircle size={18} aria-hidden="true" /> Say hello
+            </span>
           </div>
         </div>
         <div className="contact-card">
           <div className="contact-card-header">
             <span>START A CONVERSATION</span>
-            <span className="contact-availability"><span aria-hidden="true" /> {profile.availability}</span>
+            <span className="contact-availability">
+              <span aria-hidden="true" /> {profile.availability}
+            </span>
           </div>
           <div className="contact-methods">
             <a href={`mailto:${profile.email}`} className="contact-method">
-              <span className="contact-method-icon"><Mail size={25} aria-hidden="true" /></span>
-              <span className="contact-method-copy"><strong>Email me</strong><small>{profile.email}</small></span>
+              <span className="contact-method-icon">
+                <Mail size={25} aria-hidden="true" />
+              </span>
+              <span className="contact-method-copy">
+                <strong>Email me</strong>
+                <small>{profile.email}</small>
+              </span>
               <ArrowUpRight size={22} aria-hidden="true" />
             </a>
-            <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="contact-method">
-              <span className="contact-method-icon"><MessageCircle size={25} aria-hidden="true" /></span>
-              <span className="contact-method-copy"><strong>WhatsApp</strong><small>{profile.whatsapp}</small></span>
+            <a
+              href={whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-method"
+            >
+              <span className="contact-method-icon">
+                <MessageCircle size={25} aria-hidden="true" />
+              </span>
+              <span className="contact-method-copy">
+                <strong>WhatsApp</strong>
+                <small>{profile.whatsapp}</small>
+              </span>
               <ArrowUpRight size={22} aria-hidden="true" />
             </a>
             <a href={`tel:${profile.phone}`} className="contact-method">
-              <span className="contact-method-icon"><Phone size={25} aria-hidden="true" /></span>
-              <span className="contact-method-copy"><strong>Call me</strong><small>{profile.phone}</small></span>
+              <span className="contact-method-icon">
+                <Phone size={25} aria-hidden="true" />
+              </span>
+              <span className="contact-method-copy">
+                <strong>Call me</strong>
+                <small>{profile.phone}</small>
+              </span>
               <ArrowUpRight size={22} aria-hidden="true" />
             </a>
-            <a href={profile.github} target="_blank" rel="noopener noreferrer" className="contact-method">
-              <span className="contact-method-icon"><Github size={25} aria-hidden="true" /></span>
-              <span className="contact-method-copy"><strong>GitHub</strong><small>Explore my development work</small></span>
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-method"
+            >
+              <span className="contact-method-icon">
+                <Github size={25} aria-hidden="true" />
+              </span>
+              <span className="contact-method-copy">
+                <strong>GitHub</strong>
+                <small>Explore my development work</small>
+              </span>
               <ArrowUpRight size={22} aria-hidden="true" />
             </a>
           </div>
           <a className="contact-card-cta" href={`mailto:${profile.email}`}>
-            <Mail size={20} aria-hidden="true" /> Send a message <ArrowUpRight size={19} aria-hidden="true" />
+            <Mail size={20} aria-hidden="true" /> Send a message{" "}
+            <ArrowUpRight size={19} aria-hidden="true" />
           </a>
-          <p className="contact-card-footer">Let’s turn ideas into something useful.</p>
+          <p className="contact-card-footer">
+            Let’s turn ideas into something useful.
+          </p>
         </div>
       </div>
     </section>
@@ -465,16 +783,19 @@ export default function App() {
       <div className="scroll-progress" aria-hidden="true" />
       <main id="main">
         <HeroSection onViewCv={() => setShowCv(true)} />
-        <AboutSection />
-        <SkillsSection />
         <WorkSection onProjectClick={setActiveProject} />
+        <SkillsSection />
+        <AboutSection />
         <ContactSection />
       </main>
       <Footer />
       {showCv && <CvModal onClose={() => setShowCv(false)} />}
-      {activeProject !== null && <ProjectModal index={activeProject} onClose={() => setActiveProject(null)} />}
+      {activeProject !== null && (
+        <ProjectModal
+          index={activeProject}
+          onClose={() => setActiveProject(null)}
+        />
+      )}
     </div>
   );
 }
-
-

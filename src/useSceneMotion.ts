@@ -130,7 +130,7 @@ export function useSceneMotion() {
         hero.removeEventListener("pointerleave", reset);
       }
       stopTick();
-      active = false; reset(); x = 0; y = 0;
+      active = false; tx = 0; ty = 0; x = 0; y = 0;
       if (portrait) gsap.set(portrait, { clearProps: "x,y" });
       if (orbit) gsap.set(orbit, { clearProps: "x,y" });
       if (halo) gsap.set(halo, { clearProps: "x,y" });
