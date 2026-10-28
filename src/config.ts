@@ -17,24 +17,42 @@ export const profile = {
 };
 export const skillGroups = [
   {
-    category: "01 / ENGINEERING",
+    category: "01 / DEVELOPMENT",
     title: "Build the idea.",
     skills: [
-      "Android development",
-      "Windows software",
-      "Web experiences",
+      "Android App Development",
+      "Windows Application Development",
+      "Web Development",
+      "Website Design",
+      "Frontend Development",
+      "Backend Development",
+      "AI Tools & Automation",
       "Git & GitHub",
+      "Software Testing & Debugging",
     ],
   },
   {
     category: "02 / DESIGN",
     title: "Shape the experience.",
-    skills: ["UI / UX design", "Creative direction"],
+    skills: [
+      "UI/UX Design",
+      "Graphic Design",
+      "Poster Design",
+      "Presentation Design",
+      "Thumbnail Design",
+      "Social Media Design",
+      "Branding & Visual Identity",
+      "Game UI Design",
+    ],
   },
   {
     category: "03 / CREATIVE",
     title: "Make it move.",
-    skills: ["Godot & 3D", "Video editing"],
+    skills: [
+      "Video Editing",
+      "Photography",
+      "3D / Game Development",
+    ],
   },
 ];
 // A small visual signature only. AZ Appverse is the complete project catalog.
