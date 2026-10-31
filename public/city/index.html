@@ -78,8 +78,8 @@ async function loadDetailedAsset(file, fallback, targetHeight, key) {
     model.updateMatrixWorld(true);
     const fitted=new THREE.Box3().setFromObject(model),center=fitted.getCenter(new THREE.Vector3());
     model.position.sub(new THREE.Vector3(center.x,fitted.min.y,center.z));
-    fallback.visible=false;
-    fallback.parent.add(model);
+    fallback.children.forEach(child=>{child.visible=false});
+    fallback.add(model);
     assetStatus[key]='loaded';
     return true;
   }catch(e){console.info('Using procedural '+key+' fallback:',e.message);return false}
