@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07091b"><title>AZ CITY — Phase 1</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#07091b;color:#fff;font-family:Inter,system-ui,sans-serif;overflow:hidden}canvas{display:block}header{position:absolute;z-index:3;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(16px,4vw,50px);pointer-events:none}header a,.pill{pointer-events:auto;color:#e7eaff;text-decoration:none;background:#10142bba;border:1px solid #8c83ff55;padding:11px 16px;border-radius:99px;backdrop-filter:blur(12px)}.brand{font-weight:900;letter-spacing:.18em}.brand b{color:#9a87ff}main{position:absolute;z-index:2;top:19%;left:clamp(16px,6vw,90px);pointer-events:none;text-shadow:0 3px 25px #050611}.eyebrow{color:#b8b4ff;letter-spacing:.3em;font-size:12px}h1{font-size:clamp(42px,7vw,100px);line-height:.9;margin:15px 0;letter-spacing:-.07em}h1 span{color:#a991ff}main p{max-width:420px;color:#e1e5fa;line-height:1.6}.hud{position:absolute;bottom:24px;left:24px;z-index:3;background:#090d20bb;border:1px solid #8c83ff44;border-radius:16px;padding:14px 18px;backdrop-filter:blur(10px);font-size:13px;color:#e0e4ff}.hud strong{display:block;margin-bottom:5px}.controls{position:absolute;bottom:20px;right:20px;z-index:4;display:grid;grid-template-columns:repeat(3,52px);gap:8px;touch-action:none}.controls button{width:52px;height:52px;border:1px solid #a89aff77;border-radius:15px;background:#151b3bdc;color:white;font-size:24px;touch-action:none}.controls button:active{background:#7561d5}#loading{position:absolute;inset:0;display:grid;place-items:center;background:#07091b;z-index:8}#error{display:none;position:absolute;z-index:9;inset:20%;padding:20px;background:#15182d;border-radius:18px}small{opacity:.75}@media(max-width:650px){main{top:14%}main p{max-width:260px;font-size:13px}.hud{bottom:18px;left:12px;max-width:180px;font-size:11px}.controls{right:10px;bottom:12px;grid-template-columns:repeat(3,45px)}.controls button{width:45px;height:45px}header{padding:12px}.brand{font-size:13px}}
+</style>
+</head>
+<body>
+<div id="loading" role="status">Loading AZ CITY…</div><div id="error" role="alert">3D graphics could not load. Check your internet connection and WebGL support. <a href="../">Return to portfolio</a>.</div>
+<header><div class="brand">AZ <b>CITY</b></div><a href="../" aria-label="Back to AZ Portfolio">← Portfolio</a></header>
+<main><div class="eyebrow">WELCOME TO MY WORLD / 001</div><h1>AZ <span>CITY.</span></h1><p>A cinematic journey through technology, creativity and the projects of Mohammed Azeem.</p><small>PHASE 1 · INTERACTIVE PROTOTYPE</small></main>
+<div class="hud"><strong>DRIVE TO EXPLORE</strong>W / ↑ accelerate · S / ↓ reverse<br>A / D steer · Space brake<br><span id="speed">Speed: 0</span></div>
+<div class="controls" aria-label="Touch driving controls"><span></span><button data-key="w" aria-label="Accelerate">↑</button><span></span><button data-key="a" aria-label="Steer left">←</button><button data-key="s" aria-label="Reverse">↓</button><button data-key="d" aria-label="Steer right">→</button></div>
+<script type="module">
+import * as THREE from 'https://esm.sh/three@0.170.0';
+const loading=document.getElementById('loading'), error=document.getElementById('error');
+try {
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x080b1f);scene.fog=new THREE.FogExp2(0x080b1f,.012);
+const camera=new THREE.PerspectiveCamera(64,innerWidth/innerHeight,.1,550);
+const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;document.body.prepend(renderer.domElement);
+scene.add(new THREE.HemisphereLight(0x9ca8ff,0x14101c,2));
+const sun=new THREE.DirectionalLight(0xffa0d4,2.3);sun.position.set(-35,65,-80);scene.add(sun);
+const mat=(c,roughness=0.8)=>new THREE.MeshStandardMaterial({color:c,roughness});
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(500,500),mat(0x11162a));ground.rotation.x=-Math.PI/2;scene.add(ground);
+const road=new THREE.Mesh(new THREE.PlaneGeometry(18,480),mat(0x20243b));road.rotation.x=-Math.PI/2;road.position.y=.015;scene.add(road);
+for(let z=-230;z<230;z+=12){const line=new THREE.Mesh(new THREE.PlaneGeometry(.18,5),new THREE.MeshBasicMaterial({color:0x8e80f4}));line.rotation.x=-Math.PI/2;line.position.set(0,.035,z);scene.add(line)}
+for(const side of [-1,1]){const curb=new THREE.Mesh(new THREE.BoxGeometry(.3,.25,480),mat(0x69618e));curb.position.set(side*9,.1,0);scene.add(curb)}
+const buildingMats=[mat(0x222746),mat(0x303052),mat(0x1a3452),mat(0x39234e)];
+for(let i=0;i<105;i++){const z=-230+i*4.6;for(const side of [-1,1]){if(i%3===0)continue;const h=7+(i*17%28);const w=5+(i*7%7);const b=new THREE.Mesh(new THREE.BoxGeometry(w,h,6),buildingMats[i%4]);b.position.set(side*(15+(i*13%15)),h/2,z);scene.add(b);if(i%5===0){const sign=new THREE.Mesh(new THREE.BoxGeometry(w*.8,.3,.2),new THREE.MeshBasicMaterial({color:side===1?0x5dcbff:0xa47aff}));sign.position.set(b.position.x,h*.7,z+3.1);scene.add(sign)}}}
+const car=new THREE.Group();scene.add(car);
+const chassis=new THREE.Mesh(new THREE.BoxGeometry(2.3,.55,4.3),mat(0x17162d,.25));chassis.position.y=.75;car.add(chassis);
+const cabin=new THREE.Mesh(new THREE.BoxGeometry(1.85,.75,2.15),mat(0x343355,.25));cabin.position.set(0,1.35,-.25);car.add(cabin);
+for(const x of [-1.15,1.15])for(const z of [-1.35,1.35]){const wheel=new THREE.Mesh(new THREE.CylinderGeometry(.42,.42,.24,14),mat(0x08080f));wheel.rotation.z=Math.PI/2;wheel.position.set(x,.48,z);car.add(wheel)}
+for(const x of [-.8,.8]){const lamp=new THREE.Mesh(new THREE.BoxGeometry(.45,.17,.08),new THREE.MeshBasicMaterial({color:0xff3b8d}));lamp.position.set(x,.85,2.18);car.add(lamp)}
+car.position.set(0,0,10);let velocity=0,angle=0;const keys=new Set();const normalize=k=>({arrowup:'w',arrowdown:'s',arrowleft:'a',arrowright:'d'}[k]||k);
+addEventListener('keydown',e=>{const k=normalize(e.key.toLowerCase());if(['w','a','s','d',' '].includes(k)){e.preventDefault();keys.add(k)}});addEventListener('keyup',e=>keys.delete(normalize(e.key.toLowerCase())));
+document.querySelectorAll('[data-key]').forEach(b=>{const k=b.dataset.key;b.addEventListener('pointerdown',e=>{e.preventDefault();b.setPointerCapture(e.pointerId);keys.add(k)});for(const evt of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(evt,()=>keys.delete(k))});
+const clock=new THREE.Clock();const follow=new THREE.Vector3();function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.05);const throttle=(keys.has('w')?1:0)-(keys.has('s')?1:0);velocity+=throttle*13*dt;velocity*=Math.exp(-(keys.has(' ')?5:1.1)*dt);velocity=THREE.MathUtils.clamp(velocity,-9,22);const steer=(keys.has('a')?1:0)-(keys.has('d')?1:0);angle+=steer*velocity*.035*dt;car.rotation.y=angle;car.position.x-=Math.sin(angle)*velocity*dt;car.position.z-=Math.cos(angle)*velocity*dt;car.position.x=THREE.MathUtils.clamp(car.position.x,-8,8);car.position.z=THREE.MathUtils.clamp(car.position.z,-215,215);follow.set(car.position.x+Math.sin(angle)*9,6.2,car.position.z+Math.cos(angle)*12);camera.position.lerp(follow,1-Math.exp(-4*dt));camera.lookAt(car.position.x,1.1,car.position.z-6);document.getElementById('speed').textContent='Speed: '+Math.round(Math.abs(velocity)*5)+' km/h';renderer.render(scene,camera)}camera.position.set(0,7,24);loading.remove();animate();
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+}catch(e){console.error(e);loading.remove();error.style.display='block'}
+</script></body></html>
